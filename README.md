@@ -15,4 +15,9 @@
   Firebase
   </ul>
   
+  <ul>
+  Retrofit : To make it relatively easy to retrieve and upload JSON (or other structured data) via a REST based webservice.
+  Retrofit is a REST Client for Java and Android
+  </ul>
+  
   
