@@ -13,17 +13,16 @@ public class ApiViewModel extends ViewModel {
     private FetchContestsRepository repository;
     private LiveData<List<ContestObject>> liveContestList;
 
-    public ApiViewModel(){
+    public ApiViewModel() {
         super();
     }
 
-    public void init()
-    {
+    public void init() {
         repository = new FetchContestsRepository();
         liveContestList = repository.getContestsListAsync();
     }
 
-    public void fetchContestFromApi (){
+    public void fetchContestFromApi() {
         repository.fetchContestFromApi();
     }
 

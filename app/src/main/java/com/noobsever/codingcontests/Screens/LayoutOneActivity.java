@@ -1,6 +1,7 @@
 package com.noobsever.codingcontests.Screens;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -31,16 +32,16 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LayoutOneActivity extends BaseActivity{
+public class LayoutOneActivity extends AppCompatActivity {
 
     ArrayList<String> mTabItemList;
 
-    ApiViewModel apiViewModel;
-    RoomViewModel mRoomViewModel;
+//    ApiViewModel apiViewModel;
+//    RoomViewModel mRoomViewModel;
     RecyclerView titlesRecycler;
-    PlatformsListAdapter platformsListAdapter;
-    ParallaxLayerLayout mParallaxLayout;
-    SensorTranslationUpdater sensorTranslationUpdater;
+//    PlatformsListAdapter platformsListAdapter;
+//    ParallaxLayerLayout mParallaxLayout;
+//    SensorTranslationUpdater sensorTranslationUpdater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,12 @@ public class LayoutOneActivity extends BaseActivity{
         FrameLayout content = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_layout_one, content);
 
-        mParallaxLayout = findViewById(R.id.ActivityOneParallax);
-        sensorTranslationUpdater = new SensorTranslationUpdater(this);
-        mParallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
+//        mParallaxLayout = findViewById(R.id.ActivityOneParallax);
+//        sensorTranslationUpdater = new SensorTranslationUpdater(this);
+//        mParallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
 
         // RoomDB data saving start -------------------------------------------------------------------
-        mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
+//        mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
 
 //        // Testing Api Start -------------------------------------------------------------------------
 //        apiViewModel = ViewModelProviders.of(this).get(ApiViewModel.class);
@@ -66,25 +67,25 @@ public class LayoutOneActivity extends BaseActivity{
 //                //mRoomViewModel.addAllContest(contestObjects);
 //            }
 //        });
-//
-//        apiViewModel.fetchContestFromApi();
 
-        mRoomViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
-            @Override
-            public void onChanged(List<ContestObject> contestObjects) {
-                EventBus.getDefault().post(contestObjects);
-                Log.e("Objs From DB>>>>",String.valueOf(contestObjects.size()));
-                if(Methods.getIntPreferences(LayoutOneActivity.this,Constants.ISINTERNET,Constants.ISINTERNET)==0){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LayoutOneActivity.this)
-                            .setTitle("No Internet Connection")
-                            .setMessage("You are not connected to internet. Try Again Restarting App with Internet.")
-                            .setPositiveButton("OK", null)
-                            .setIcon(R.drawable.ic_baseline_arrow_forward_ios_24);
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                }
-            }
-        });
+//        apiViewModel.fetchContestFromApi();
+//
+//        mRoomViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
+//            @Override
+//            public void onChanged(List<ContestObject> contestObjects) {
+//                EventBus.getDefault().post(contestObjects);
+//                Log.e("Objs From DB>>>>",String.valueOf(contestObjects.size()));
+//                if(Methods.getIntPreferences(LayoutOneActivity.this,Constants.ISINTERNET,Constants.ISINTERNET)==0){
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(LayoutOneActivity.this)
+//                            .setTitle("No Internet Connection")
+//                            .setMessage("You are not connected to internet. Try Again Restarting App with Internet.")
+//                            .setPositiveButton("OK", null)
+//                            .setIcon(R.drawable.ic_baseline_arrow_forward_ios_24);
+//                    AlertDialog alertDialog = builder.create();
+//                    alertDialog.show();
+//                }
+//            }
+//        });
 
         // Testing Api End -------------------------------------------------------------------------
         // RoomDB data saving end -------------------------------------------------------------------
@@ -92,38 +93,38 @@ public class LayoutOneActivity extends BaseActivity{
         /** Storing an ArrayList in SharedPreference using Gson.
          *  Reference : https://stackoverflow.com/a/27872280/13803511 */
 
-        try {
-            mTabItemList = (ArrayList<String>) Methods.fetchTabItems(this);
+//        try {
+//            mTabItemList = (ArrayList<String>) Methods.fetchTabItems(this);
+//
+//        }catch (NullPointerException e) {
+//            e.printStackTrace();
+//            // Displays all tabs by Default.
+//            mTabItemList = new ArrayList<>();
+//            mTabItemList.add(Constants.CODEFORCES);
+//            mTabItemList.add(Constants.CODECHEF);
+//            mTabItemList.add(Constants.HACKERRANK);
+//            mTabItemList.add(Constants.HACKEREARTH);
+//            mTabItemList.add(Constants.SPOJ);
+//            mTabItemList.add(Constants.ATCODER);
+//            mTabItemList.add(Constants.LEETCODE);
+//            mTabItemList.add(Constants.GOOGLE);
+//
+//            // Bug fixed below : When App launches for first time Setting checkboxes remaining unmarked.
+//            Methods.saveTabItems(this,mTabItemList);
+//        }
 
-        }catch (NullPointerException e) {
-            e.printStackTrace();
-            // Displays all tabs by Default.
-            mTabItemList = new ArrayList<>();
-            mTabItemList.add(Constants.CODEFORCES);
-            mTabItemList.add(Constants.CODECHEF);
-            mTabItemList.add(Constants.HACKERRANK);
-            mTabItemList.add(Constants.HACKEREARTH);
-            mTabItemList.add(Constants.SPOJ);
-            mTabItemList.add(Constants.ATCODER);
-            mTabItemList.add(Constants.LEETCODE);
-            mTabItemList.add(Constants.GOOGLE);
+//        titlesRecycler = findViewById(R.id.titles_recycler_view);
+//        titlesRecycler.setLayoutManager(new LinearLayoutManager(this));
+//        platformsListAdapter = new PlatformsListAdapter(this,mTabItemList);
+//        titlesRecycler.setAdapter(platformsListAdapter);
 
-            // Bug fixed below : When App launches for first time Setting checkboxes remaining unmarked.
-            Methods.saveTabItems(this,mTabItemList);
-        }
-
-        titlesRecycler = findViewById(R.id.titles_recycler_view);
-        titlesRecycler.setLayoutManager(new LinearLayoutManager(this));
-        platformsListAdapter = new PlatformsListAdapter(this,mTabItemList);
-        titlesRecycler.setAdapter(platformsListAdapter);
-
-        saveActivity();
+//        saveActivity();
     }
 
     //  Function to remember current activity.
-    public void saveActivity() {
-        Methods.setPreferences(this, Constants.LAYOUT_SWITCH_KEY, Constants.CURRENT_ACTIVITY, 1);
-    }
+//    public void saveActivity() {
+//        Methods.setPreferences(this, Constants.LAYOUT_SWITCH_KEY, Constants.CURRENT_ACTIVITY, 1);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -142,12 +143,12 @@ public class LayoutOneActivity extends BaseActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        sensorTranslationUpdater.registerSensorManager();
+//        sensorTranslationUpdater.registerSensorManager();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        sensorTranslationUpdater.unregisterSensorManager();
+//        sensorTranslationUpdater.unregisterSensorManager();
     }
 }
