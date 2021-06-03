@@ -28,16 +28,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/home_bg_mid_layer_1" />
+                    android:src="@drawable/home_bg_mid_layer_1"
+                    app:layout_parallaxEnabled="true"/>
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/home_bg_front_layer_1" />
+                    android:src="@drawable/home_bg_front_layer_1"
+                    app:layout_parallaxEnabled="true"/>
         </com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/titles_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"

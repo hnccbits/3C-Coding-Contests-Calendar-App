@@ -13,27 +13,35 @@ public class ContestObject {
     @PrimaryKey(autoGenerate = true)
     private int _id;
 
-    @SerializedName("platform")
+//    @SerializedName("platform")
+    @SerializedName("site")
     @Expose
     private String platform;
-    @SerializedName("id")
+//    @SerializedName("id")
+    @SerializedName("duration")
     @Expose
     private String contestId;
-    @SerializedName("title")
+//    @SerializedName("title")
+    @SerializedName("name")
     @Expose
     private String title;
-    @SerializedName("start")
+//    @SerializedName("start")
+    @SerializedName("start_time")
     @Expose
     private String start;
-    @SerializedName("end")
+//    @SerializedName("end")
+    @SerializedName("end_time")
     @Expose
     private String end;
+//    @SerializedName("duration")
     @SerializedName("duration")
     @Expose
     private String duration;
-    @SerializedName("link")
+//    @SerializedName("link")
+    @SerializedName("url")
     @Expose
     private String link;
+//    @SerializedName("status")
     @SerializedName("status")
     @Expose
     private String status;

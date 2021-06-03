@@ -54,5 +54,5 @@ dependencies {
 
     implementation 'org.greenrobot:eventbus:3.2.0'
 
-    implementation 'com.schibsted.spain:parallax-layer-layout:1.1.1'
+    implementation 'com.schibsted.spain:parallax-layer-layout:1.1.2'
 }

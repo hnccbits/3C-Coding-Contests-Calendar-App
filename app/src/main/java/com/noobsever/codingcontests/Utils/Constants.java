@@ -19,7 +19,9 @@ public class Constants {
     public static final String CONTEST_OBJECT_TABLE_NAME = "CONTEST_OBJECT_TABLE";
     public static final String ROOM_DB_NAME = "CONTEST_DB";
     //need to be changed API_URL
-    public static final String API_URL = "https://hnccbits.com/";
+    /**url: https://kontests.net/api/v1/all
+     * */
+    public static final String API_URL = "https://kontests.net/api/v1/";
     public static final String WEBSITE = "website";
     public static final String ISINTERNET = "isInterNet";
 }
