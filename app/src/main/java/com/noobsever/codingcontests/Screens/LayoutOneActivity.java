@@ -13,9 +13,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
+
 import com.google.android.material.tabs.TabLayout;
 import com.noobsever.codingcontests.Adapters.CardAdapter;
 import com.noobsever.codingcontests.Adapters.PlatformsListAdapter;
+import com.noobsever.codingcontests.Models.ApiResponse;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
 import com.noobsever.codingcontests.Utils.Constants;
@@ -63,30 +66,33 @@ public class LayoutOneActivity extends AppCompatActivity {
 
         /**TODO: test API url: https://kontests.net/api/v1/all*/
 //        apiViewModel = ViewModelProviders.of(this).get(ApiViewModel.class);
-//        apiViewModel.init();
-//        apiViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
-//            @Override
-//            public void onChanged(List<ContestObject> contestObjects) {
-//                mRoomViewModel.deleteAndAddAllTuples(contestObjects);
-//                //mRoomViewModel.addAllContest(contestObjects);
-//            }
-//        });
-//
-//        apiViewModel.fetchContestFromApi();
+        apiViewModel=new ViewModelProvider(this).get(ApiViewModel.class);
+        apiViewModel.init();
+        apiViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
+            @Override
+            public void onChanged(List<ContestObject> contestObjects) {
+                mRoomViewModel.deleteAndAddAllTuples(contestObjects);
+                //mRoomViewModel.addAllContest(contestObjects);
+            }
+        });
+
+        apiViewModel.fetchContestFromApi();
 
         mRoomViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
             @Override
             public void onChanged(List<ContestObject> contestObjects) {
                 EventBus.getDefault().post(contestObjects);
                 Log.e("Objs From DB>>>>",String.valueOf(contestObjects.size()));
+                Log.e("DATA:", "Title>>>> "+contestObjects.get(0).getPlatform() );
                 if(Methods.getIntPreferences(LayoutOneActivity.this,Constants.ISINTERNET,Constants.ISINTERNET)==0){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LayoutOneActivity.this)
-                            .setTitle("No Internet Connection")
-                            .setMessage("You are not connected to internet. Try Again Restarting App with Internet.")
-                            .setPositiveButton("OK", null)
-                            .setIcon(R.drawable.ic_baseline_arrow_forward_ios_24);
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+                    Toast.makeText(getApplicationContext(),"Network Issue Alert",Toast.LENGTH_SHORT).show();
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(LayoutOneActivity.this)
+//                            .setTitle("No Internet Connection")
+//                            .setMessage("You are not connected to internet. Try Again Restarting App with Internet.")
+//                            .setPositiveButton("OK", null)
+//                            .setIcon(R.drawable.ic_baseline_arrow_forward_ios_24);
+//                    AlertDialog alertDialog = builder.create();
+//                    alertDialog.show();
                 }
             }
         });

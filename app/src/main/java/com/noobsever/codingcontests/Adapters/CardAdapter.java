@@ -46,7 +46,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
     public void setData(List<ContestObject> data) {
         this.ContestObjectArrayList = data;
         notifyDataSetChanged();
-        InitializeBool();
+      InitializeBool();
     }
 
     public void InitializeBool() {
@@ -71,6 +71,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
         holder.mDateEnd.setText(ContestObjectArrayList.get(position).getEnd());
         holder.mDateStart.setText(ContestObjectArrayList.get(position).getStart());
         holder.mDuration.setText(ContestObjectArrayList.get(position).getDuration());
+        Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: "+ContestObjectArrayList.get(position).getTitle() );
 
         if(CheckMoreFlag.get(position))
         {

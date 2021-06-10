@@ -1,14 +1,17 @@
 package com.noobsever.codingcontests.Screens;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -16,9 +19,13 @@ import android.widget.ImageView;
 import com.noobsever.codingcontests.Adapters.CardAdapter;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
+import com.noobsever.codingcontests.Repository.RoomRepository;
 import com.noobsever.codingcontests.Utils.Constants;
 import com.noobsever.codingcontests.Utils.Methods;
+import com.noobsever.codingcontests.ViewModel.ApiViewModel;
 import com.noobsever.codingcontests.ViewModel.RoomViewModel;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +38,7 @@ public class ShowContestCardsActivity extends AppCompatActivity {
     private CardAdapter mCardAdapter;
     private ImageView mContestImage;
     RoomViewModel mRoomViewModel;
+    ApiViewModel apiViewModel;
     List<ContestObject> contestByPlatform;
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -49,12 +57,22 @@ public class ShowContestCardsActivity extends AppCompatActivity {
 
         mRecyclerCodeforces = findViewById(R.id.ContestCardsRecycler);
         mRecyclerCodeforces.setLayoutManager(new LinearLayoutManager(this));
-        mCardAdapter = new CardAdapter(this);
-        mRecyclerCodeforces.setAdapter(mCardAdapter);
-        mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
         contestByPlatform = new ArrayList<>();
+        mCardAdapter = new CardAdapter(this,contestByPlatform);
+        mRecyclerCodeforces.setAdapter(mCardAdapter);
         mCardAdapter.setData(contestByPlatform);
 
+
+        mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
+                mRoomViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
+            @Override
+            public void onChanged(List<ContestObject> contestObjects) {
+                EventBus.getDefault().post(contestObjects);
+                Log.e("Objs on show card>>>>",String.valueOf(contestObjects.size()));
+                mRecyclerCodeforces.setAdapter(mCardAdapter);
+                mCardAdapter.setData(contestObjects);
+            }
+        });
         assert website != null;
         switch (website) {
             case Constants.CODEFORCES:
@@ -90,6 +108,9 @@ public class ShowContestCardsActivity extends AppCompatActivity {
            co.setDuration(Methods.secondToFormatted(co.getDuration()));
         }
         mCardAdapter.setData(contestByPlatform);
+
+
+
 
     }
 

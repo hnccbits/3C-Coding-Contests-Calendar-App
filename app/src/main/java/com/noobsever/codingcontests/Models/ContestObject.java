@@ -18,9 +18,9 @@ public class ContestObject {
     @Expose
     private String platform;
 //    @SerializedName("id")
-    @SerializedName("duration")
-    @Expose
-    private String contestId;
+//    @SerializedName("duration")
+//    @Expose
+//    private String contestId;
 //    @SerializedName("title")
     @SerializedName("name")
     @Expose
@@ -60,7 +60,7 @@ public class ContestObject {
 
     public ContestObject(String platform, String contestId, String title, String start, String end, String duration, String link, String status) {
         this.platform = platform;
-        this.contestId = contestId;
+//        this.contestId = contestId;
         this.title = title;
         this.start = start;
         this.end = end;
@@ -101,9 +101,9 @@ public class ContestObject {
         return status;
     }
 
-    public String getContestId() {
-        return contestId;
-    }
+//    public String getContestId() {
+//        return contestId;
+//    }
 
     public void set_id(int _id) {
         this._id = _id;
@@ -137,9 +137,9 @@ public class ContestObject {
         this.platform =  platform;
     }
 
-    public void setContestId(String contestId) {
-        this.contestId = contestId;
-    }
+//    public void setContestId(String contestId) {
+//        this.contestId = contestId;
+//    }
 }
 
 

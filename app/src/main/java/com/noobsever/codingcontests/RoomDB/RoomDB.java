@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.Utils.Constants;
 
-@Database(entities = {ContestObject.class}, version = 1)
+@Database(entities = {ContestObject.class}, version = 2)
 public abstract class RoomDB extends RoomDatabase {
 
     //TODO Room Functions to be written in this folder

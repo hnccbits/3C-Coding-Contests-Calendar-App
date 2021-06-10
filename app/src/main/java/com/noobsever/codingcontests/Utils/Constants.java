@@ -21,7 +21,7 @@ public class Constants {
     //need to be changed API_URL
     /**url: https://kontests.net/api/v1/all
      * */
-    public static final String API_URL = "https://kontests.net/api/v1/";
+    public static final String API_URL = "https://kontests.net/";
     public static final String WEBSITE = "website";
     public static final String ISINTERNET = "isInterNet";
 }

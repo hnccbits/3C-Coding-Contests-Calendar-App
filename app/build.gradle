@@ -55,4 +55,8 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
 
     implementation 'com.schibsted.spain:parallax-layer-layout:1.1.2'
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
 }
