@@ -78,24 +78,24 @@ public class LayoutOneActivity extends AppCompatActivity {
 
         apiViewModel.fetchContestFromApi();
 
-        mRoomViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
-            @Override
-            public void onChanged(List<ContestObject> contestObjects) {
-                EventBus.getDefault().post(contestObjects);
-                Log.e("Objs From DB>>>>",String.valueOf(contestObjects.size()));
-                Log.e("DATA:", "Title>>>> "+contestObjects.get(0).getPlatform() );
-                if(Methods.getIntPreferences(LayoutOneActivity.this,Constants.ISINTERNET,Constants.ISINTERNET)==0){
-                    Toast.makeText(getApplicationContext(),"Network Issue Alert",Toast.LENGTH_SHORT).show();
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(LayoutOneActivity.this)
-//                            .setTitle("No Internet Connection")
-//                            .setMessage("You are not connected to internet. Try Again Restarting App with Internet.")
-//                            .setPositiveButton("OK", null)
-//                            .setIcon(R.drawable.ic_baseline_arrow_forward_ios_24);
-//                    AlertDialog alertDialog = builder.create();
-//                    alertDialog.show();
-                }
-            }
-        });
+//        mRoomViewModel.getAllContests().observe(this, new Observer<List<ContestObject>>() {
+//            @Override
+//            public void onChanged(List<ContestObject> contestObjects) {
+//                EventBus.getDefault().post(contestObjects);
+//                Log.e("Objs From DB>>>>",String.valueOf(contestObjects.size()));
+//                Log.e("DATA:", "Title>>>> "+contestObjects.get(0).getPlatform() );
+//                if(Methods.getIntPreferences(LayoutOneActivity.this,Constants.ISINTERNET,Constants.ISINTERNET)==0){
+//                    Toast.makeText(getApplicationContext(),"Network Issue Alert",Toast.LENGTH_SHORT).show();
+////                    AlertDialog.Builder builder = new AlertDialog.Builder(LayoutOneActivity.this)
+////                            .setTitle("No Internet Connection")
+////                            .setMessage("You are not connected to internet. Try Again Restarting App with Internet.")
+////                            .setPositiveButton("OK", null)
+////                            .setIcon(R.drawable.ic_baseline_arrow_forward_ios_24);
+////                    AlertDialog alertDialog = builder.create();
+////                    alertDialog.show();
+//                }
+//            }
+//        });
 
         // Testing Api End -------------------------------------------------------------------------
         // RoomDB data saving end -------------------------------------------------------------------
