@@ -50,10 +50,10 @@ public class LayoutOneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-
-        FrameLayout content = findViewById(R.id.content_frame);
-        getLayoutInflater().inflate(R.layout.activity_layout_one, content);
+        setContentView(R.layout.activity_layout_one);
+        Log.e("OnActivity:>>>", "onCreate: "+"LayoutOneActivity" );
+//        FrameLayout content = findViewById(R.id.content_frame);
+//        getLayoutInflater().inflate(R.layout.activity_layout_one, content);
 
         mParallaxLayout = findViewById(R.id.ActivityOneParallax);
         sensorTranslationUpdater = new SensorTranslationUpdater(this);

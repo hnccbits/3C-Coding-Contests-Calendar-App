@@ -36,8 +36,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Screens.LayoutTwoActivity" />
-        <activity android:name=".Screens.LayoutOneActivity" />
+        <activity android:name=".Screens.LayoutTwoActivity"
+            android:parentActivityName=".Screens.BaseActivity"/>
+        <activity android:name=".Screens.LayoutOneActivity"
+            android:parentActivityName=".Screens.BaseActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

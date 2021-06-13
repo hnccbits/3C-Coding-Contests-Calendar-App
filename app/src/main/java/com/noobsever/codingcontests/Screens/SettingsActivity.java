@@ -135,10 +135,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         Methods.saveTabItems(this,checkedItem);
 
-        if(Methods.getIntPreferences(SettingsActivity.this, Constants.LAYOUT_SWITCH_KEY,Constants.CURRENT_ACTIVITY)==1)
-            startActivity(new Intent(SettingsActivity.this,LayoutOneActivity.class));
-        else
-            startActivity(new Intent(SettingsActivity.this,LayoutTwoActivity.class));
+//        if(Methods.getIntPreferences(SettingsActivity.this, Constants.LAYOUT_SWITCH_KEY,Constants.CURRENT_ACTIVITY)==1)
+//            startActivity(new Intent(SettingsActivity.this,LayoutOneActivity.class));
+//        else
+//            startActivity(new Intent(SettingsActivity.this,LayoutTwoActivity.class));
+        startActivity(new Intent(SettingsActivity.this,BaseActivity.class));
         finishAffinity();
     }
 
