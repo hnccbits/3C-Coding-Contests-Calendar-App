@@ -40,7 +40,7 @@ public class ShowContestCardsActivity extends AppCompatActivity {
     RoomViewModel mRoomViewModel;
     ApiViewModel apiViewModel;
     List<ContestObject> contestByPlatform;
-
+    String website;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,13 @@ public class ShowContestCardsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.app_bar_of_cards);
         setSupportActionBar(toolbar);
-        String website = getIntent().getStringExtra(Constants.WEBSITE);
+        website = getIntent().getStringExtra(Constants.WEBSITE);
         Objects.requireNonNull(getSupportActionBar()).setTitle(website);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if(website.equals(Constants.GOOGLE))
+        {
+            website="Kick Start";       // due to API result ,for Google
+        }
         mRecyclerCodeforces = findViewById(R.id.ContestCardsRecycler);
         mRecyclerCodeforces.setLayoutManager(new LinearLayoutManager(this));
         contestByPlatform = new ArrayList<>();
@@ -70,7 +73,15 @@ public class ShowContestCardsActivity extends AppCompatActivity {
                 EventBus.getDefault().post(contestObjects);
                 Log.e("Objs on show card>>>>",String.valueOf(contestObjects.size()));
                 mRecyclerCodeforces.setAdapter(mCardAdapter);
-                mCardAdapter.setData(contestObjects);
+                for(ContestObject contest :contestObjects)
+                {
+                    if(contest.getPlatform().toLowerCase().equals(website.toLowerCase()))
+                    {
+                        contestByPlatform.add(contest);
+                    }
+                }
+                mCardAdapter.setData(contestByPlatform);
+
             }
         });
         assert website != null;

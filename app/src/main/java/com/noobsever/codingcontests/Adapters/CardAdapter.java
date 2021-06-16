@@ -66,12 +66,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
     public void onBindViewHolder(@NonNull final CardAdapterViewHolder holder, final int position) {
 
         holder.mCard.setAnimation(AnimationUtils.loadAnimation(context,R.anim.pop_in));
-
+        Log.e("Platform>>>", " "+ContestObjectArrayList.get(position).getPlatform() );
+        Log.e("Total Objs>>>", "size: "+ ContestObjectArrayList.size() );
         holder.mRoundName.setText(ContestObjectArrayList.get(position).getTitle());
         holder.mDateEnd.setText(ContestObjectArrayList.get(position).getEnd());
         holder.mDateStart.setText(ContestObjectArrayList.get(position).getStart());
         holder.mDuration.setText(ContestObjectArrayList.get(position).getDuration());
-        Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: "+ContestObjectArrayList.get(position).getTitle() );
+//        Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: "+ContestObjectArrayList.get(position).getTitle() );
 
         if(CheckMoreFlag.get(position))
         {
