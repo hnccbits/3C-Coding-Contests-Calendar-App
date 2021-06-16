@@ -17,11 +17,23 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name = ".NotifyService"
-            android:enabled = "true"
-            android:exported = "true" >
-        </service>
+<!--        <service-->
+<!--            android:name = ".NotifyService"-->
+<!--            android:enabled = "true"-->
+<!--            android:exported = "true" >-->
+<!--        </service>-->
+<!--        <service android:name=".FirebaseMessageReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
+<!--        <service-->
+<!--            android:name=".java.MyFirebaseMessagingService"-->
+<!--            android:exported="false">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
         <activity android:name=".Screens.ShowContestCardsActivity"
             android:parentActivityName=".Screens.LayoutOneActivity"/>
         <activity android:name=".Screens.RoomActivity" />

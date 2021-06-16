@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.noobsever.codingcontests.BuildConfig;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
@@ -49,6 +50,7 @@ public class BaseActivity extends AppCompatActivity {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
+        FirebaseMessaging.getInstance().subscribeToTopic("coding");
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
