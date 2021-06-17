@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     private CheckBox cforces,cchef,hrank,hearth,spoj,atcoder,leetcode,google;
-    private SwitchMaterial switchTwelve, switchTwentyFour, switchNotification;
+    private SwitchMaterial switchTwelve, switchTwentyFour, switchNotification,switchRated,switchRunning,switchUpcomingSevenDays;
     ArrayList<String> checkedItem;
 
     @Override
@@ -57,11 +57,60 @@ public class SettingsActivity extends AppCompatActivity {
         switchTwelve = findViewById(R.id.switch_12_time_format);
         switchTwentyFour = findViewById(R.id.switch_24_time_format);
         switchNotification = findViewById(R.id.switch_notification);
+        switchRated=findViewById(R.id.switch_ratedcontest);
+        switchRunning=findViewById(R.id.switch_runningcontest);
+        switchUpcomingSevenDays=findViewById(R.id.switch_upcoming1week);
 
         restoreCheckBoxState();
 
         restoreToggledItemsState();
 
+        switchRated.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked)
+                {
+                    //If Rated Contest switch checked, 1 is stored in sharedPreferences indicating ON
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RATED,Constants.SWITCH_RATED,1);
+                }
+                else
+                {
+                    //If Rated Contest switch Unchecked, 0 is stored in sharedPreferences indicating ON
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RATED,Constants.SWITCH_RATED,0);
+                }
+            }
+        });
+        switchRunning.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    //If Running Contest switch checked, 1 is stored in sharedPreferences indicating ON
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RUNNING,Constants.SWITCH_RUNNING,1);
+                }
+                else
+                {
+                    //If Running Contest switch Unchecked, 0 is stored in sharedPreferences indicating ON
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RUNNING,Constants.SWITCH_RUNNING,0);
+                }
+            }
+        });
+        switchUpcomingSevenDays.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    //If upcoming 7 days Contest switch checked, 1 is stored in sharedPreferences indicating ON
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,1);
+                }
+                else
+                {
+                    //If upcoming 7 days Contest switch Unchecked, 0 is stored in sharedPreferences indicating ON
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,0);
+                }
+            }
+        });
         switchTwelve.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -161,6 +210,9 @@ public class SettingsActivity extends AppCompatActivity {
         switchTwelve.setChecked(Methods.getIntPreferences(SettingsActivity.this,Constants.SWITCH_TWELVE,Constants.SWITCH_TWELVE)!=0);
         switchTwentyFour.setChecked(Methods.getIntPreferences(SettingsActivity.this,Constants.SWITCH_TWELVE,Constants.SWITCH_TWELVE)==0);
         switchNotification.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_NOTIFICATION, Constants.SWITCH_NOTIFICATION) != 0);
+        switchRated.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED) != 0);
+        switchRunning.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING) != 0);
+        switchUpcomingSevenDays.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS) != 0);
     }
 
     // Fixing : Back button on Appbar of settings activity won't function the expected way.

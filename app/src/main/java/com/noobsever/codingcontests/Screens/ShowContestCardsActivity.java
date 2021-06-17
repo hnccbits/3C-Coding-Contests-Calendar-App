@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.noobsever.codingcontests.Adapters.CardAdapter;
 import com.noobsever.codingcontests.Models.ContestObject;
@@ -77,7 +78,60 @@ public class ShowContestCardsActivity extends AppCompatActivity {
                 {
                     if(contest.getPlatform().toLowerCase().equals(website.toLowerCase()))
                     {
-                        contestByPlatform.add(contest);
+                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)!=0
+                                || Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0
+                                || Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS)!=0)
+                        {
+
+
+                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0
+                                && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)==0)
+                        {
+                            Toast.makeText(ShowContestCardsActivity.this, "Rated Contest", Toast.LENGTH_SHORT).show();
+                            //for filtering based on Rated Contest ONLY
+                            filterRatedContest(contest);
+
+                        }
+                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)!=0
+                        && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)==0)
+                        {
+                            //for filtering based on Running Contest ONLY
+                            Toast.makeText(ShowContestCardsActivity.this, "Running Contest", Toast.LENGTH_SHORT).show();
+                            if(contest.getStatus().equals("CODING"))
+                            {
+                                contestByPlatform.add(contest);
+                            }
+
+                        }
+                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)!=0
+                                && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0)
+                        {
+                            //for filtering BOTH based on Rated Contest and based on Running Contest
+                            if(contest.getStatus().equals("CODING"))
+                            {
+                                Toast.makeText(ShowContestCardsActivity.this, "Rated & Running Contest", Toast.LENGTH_SHORT).show();
+                                filterRatedContest(contest);
+                            }
+                        }
+                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS)!=0
+                                && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)==0 )
+                        {
+                            Toast.makeText(ShowContestCardsActivity.this, "upcoming 7 days contest", Toast.LENGTH_SHORT).show();
+                            //Filtering UpComing 7 days Contest ONLY
+                            //TODO calculate Duration in days and STATUS="BEFORE"
+                        }
+                            if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS)!=0
+                                    && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0 )
+                            {
+                                Toast.makeText(ShowContestCardsActivity.this, "upcoming 7 days Rated contest", Toast.LENGTH_SHORT).show();
+                                //Filtering BOTH Rated & Upcoming Seven Days Contest
+                                //TODO calculate Duration in days and STATUS="BEFORE"
+                            }
+                        }
+                        else
+                        {
+                            contestByPlatform.add(contest);
+                        }
                     }
                 }
                 mCardAdapter.setData(contestByPlatform);
@@ -122,6 +176,13 @@ public class ShowContestCardsActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    private void filterRatedContest(ContestObject contest) {
+
+        //TODO: implement Rated Contest Filtering (contestByPlatform.add(contest);)
+        Toast.makeText(this, "Filtering Rated Contest", Toast.LENGTH_SHORT).show();
 
     }
 

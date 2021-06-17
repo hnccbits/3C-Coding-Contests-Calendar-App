@@ -16,6 +16,9 @@ public class Constants {
     public static final String CURRENT_ACTIVITY = "CURRENT_ACTIVITY";
     public static final String SWITCH_TWELVE = "SWITCH_TWELVE";
     public static final String SWITCH_NOTIFICATION = "SWITCH_NOTIFICATION";
+    public static final String SWITCH_RATED = "SWITCH_RATED";
+    public static final String SWITCH_RUNNING = "SWITCH_RUNNING";
+    public static final String SWITCH_UPCOMING_SEVEN_DAYS = "SWITCH_UPCOMING_SEVEN_DAYS";
     public static final String CONTEST_OBJECT_TABLE_NAME = "CONTEST_OBJECT_TABLE";
     public static final String ROOM_DB_NAME = "CONTEST_DB";
     //need to be changed API_URL
