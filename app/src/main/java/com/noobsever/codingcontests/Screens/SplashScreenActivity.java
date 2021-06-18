@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import com.noobsever.codingcontests.R;
+import com.noobsever.codingcontests.SignIn;
 import com.noobsever.codingcontests.Utils.Constants;
 import com.noobsever.codingcontests.Utils.Methods;
 
@@ -19,7 +20,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
 //                if(loadActivity()==1 || loadActivity()==0)
-                    startActivity(new Intent(SplashScreenActivity.this, BaseActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, SignIn.class));
 //                else
 //                    startActivity(new Intent(SplashScreenActivity.this, LayoutTwoActivity.class));
                 finish();

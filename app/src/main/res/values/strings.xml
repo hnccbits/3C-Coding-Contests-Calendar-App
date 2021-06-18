@@ -42,4 +42,6 @@
     <string name="hr_12_format">12-hour</string>
     <string name="hr_24_format">24-hour</string>
     <string name="faq">Frequently Asked Questions</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="web_client_id">140840445641-f7nov9p31ma95k53gpclpmnibuchgnir.apps.googleusercontent.com</string>
 </resources>

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.noobsever.codingcontests">
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name = "android.permission.VIBRATE" />
-    <uses-permission android:name = "android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
@@ -15,27 +20,37 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/atcoder2"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-<!--        <service-->
-<!--            android:name = ".NotifyService"-->
-<!--            android:enabled = "true"-->
-<!--            android:exported = "true" >-->
-<!--        </service>-->
-<!--        <service android:name=".FirebaseMessageReceiver">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-<!--        <service-->
-<!--            android:name=".java.MyFirebaseMessagingService"-->
-<!--            android:exported="false">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-        <activity android:name=".Screens.ShowContestCardsActivity"
-            android:parentActivityName=".Screens.LayoutOneActivity"/>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".SignIn"></activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <!-- <service -->
+        <!-- android:name = ".NotifyService" -->
+        <!-- android:enabled = "true" -->
+        <!-- android:exported = "true" > -->
+        <!-- </service> -->
+        <!-- <service android:name=".FirebaseMessageReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.MESSAGING_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <!-- <service -->
+        <!-- android:name=".java.MyFirebaseMessagingService" -->
+        <!-- android:exported="false"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.MESSAGING_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <activity
+            android:name=".Screens.ShowContestCardsActivity"
+            android:parentActivityName=".Screens.LayoutOneActivity" />
         <activity android:name=".Screens.RoomActivity" />
         <activity
             android:name=".Screens.SuggestUsActivity"
@@ -46,10 +61,12 @@
         <activity
             android:name=".Screens.NotificationActivity"
             android:parentActivityName=".Screens.BaseActivity" />
-        <activity android:name=".Screens.BaseActivity" >
+        <activity android:name=".Screens.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.INSERT" />
+
                 <data android:mimeType="vnd.android.cursor.dir/event" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -63,10 +80,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Screens.LayoutTwoActivity"
-            android:parentActivityName=".Screens.BaseActivity"/>
-        <activity android:name=".Screens.LayoutOneActivity"
-            android:parentActivityName=".Screens.BaseActivity"/>
+        <activity
+            android:name=".Screens.LayoutTwoActivity"
+            android:parentActivityName=".Screens.BaseActivity" />
+        <activity
+            android:name=".Screens.LayoutOneActivity"
+            android:parentActivityName=".Screens.BaseActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
