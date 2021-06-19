@@ -140,14 +140,65 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="Running Contests"/>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:text="Upcoming Contest in"
+                android:textColor="@color/white"
+                />
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_marginTop="10dp"
+                android:id="@+id/switch_24Hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="24 Hours"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_marginTop="10dp"
                 android:id="@+id/switch_upcoming1week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="Upcoming 7 days Contest"/>
+                android:text="1 week"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_twoWeeks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="2 weeks"/>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_oneMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="1 month"/>
+
 
         </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -232,48 +283,48 @@
         android:layout_marginBottom="8dp"
         >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="16dp">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:text="@string/contest_duration"
-            android:textColor="@color/white"
-            />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="22sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:text="@string/contest_duration"-->
+<!--            android:textColor="@color/white"-->
+<!--            />-->
 
-        <RadioGroup
-            android:layout_marginTop="10dp"
-            android:id="@+id/radioGroup"
-            android:checkedButton="@+id/rb_week_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RadioButton
-                android:textSize="18sp"
-                android:id="@+id/rb_week_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/week_1"/>
-            <RadioButton
-                android:textSize="18sp"
-                android:id="@+id/rb_week_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/week_2"/>
-            <RadioButton
-                android:textSize="18sp"
-                android:id="@+id/rb_month_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/month_1"/>
-        </RadioGroup>
+<!--        <RadioGroup-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:id="@+id/radioGroup"-->
+<!--            android:checkedButton="@+id/rb_week_1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <RadioButton-->
+<!--                android:textSize="18sp"-->
+<!--                android:id="@+id/rb_week_1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="@string/week_1"/>-->
+<!--            <RadioButton-->
+<!--                android:textSize="18sp"-->
+<!--                android:id="@+id/rb_week_2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="@string/week_2"/>-->
+<!--            <RadioButton-->
+<!--                android:textSize="18sp"-->
+<!--                android:id="@+id/rb_month_1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="@string/month_1"/>-->
+<!--        </RadioGroup>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
     </ScrollView>

@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     private CheckBox cforces,cchef,hrank,hearth,spoj,atcoder,leetcode,google;
-    private SwitchMaterial switchTwelve, switchTwentyFour, switchNotification,switchRated,switchRunning,switchUpcomingSevenDays;
+    private SwitchMaterial switchTwelve, switchTwentyFour, switchNotification,switchRated,switchRunning,switch24Hours,switchUpcomingSevenDays,switchTwoWeeks,switchOneMonth;
     ArrayList<String> checkedItem;
 
     @Override
@@ -59,8 +59,10 @@ public class SettingsActivity extends AppCompatActivity {
         switchNotification = findViewById(R.id.switch_notification);
         switchRated=findViewById(R.id.switch_ratedcontest);
         switchRunning=findViewById(R.id.switch_runningcontest);
+        switch24Hours=findViewById(R.id.switch_24Hours);
         switchUpcomingSevenDays=findViewById(R.id.switch_upcoming1week);
-
+        switchTwoWeeks=findViewById(R.id.switch_twoWeeks);
+        switchOneMonth=findViewById(R.id.switch_oneMonth);
         restoreCheckBoxState();
 
         restoreToggledItemsState();
@@ -88,6 +90,14 @@ public class SettingsActivity extends AppCompatActivity {
                 {
                     //If Running Contest switch checked, 1 is stored in sharedPreferences indicating ON
                     Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RUNNING,Constants.SWITCH_RUNNING,1);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_24HOURS,Constants.SWITCH_24HOURS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_2WEEKS,Constants.SWITCH_2WEEKS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_1MONTH,Constants.SWITCH_1MONTH,0);
+                    switch24Hours.setChecked(false);
+                    switchUpcomingSevenDays.setChecked(false);
+                    switchTwoWeeks.setChecked(false);
+                    switchOneMonth.setChecked(false);
                 }
                 else
                 {
@@ -96,18 +106,107 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+        switch24Hours.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_24HOURS,Constants.SWITCH_24HOURS,1);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_2WEEKS,Constants.SWITCH_2WEEKS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_1MONTH,Constants.SWITCH_1MONTH,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RUNNING,Constants.SWITCH_RUNNING,0);
+                    switchRunning.setChecked(false);
+                    switchUpcomingSevenDays.setChecked(false);
+                    switchTwoWeeks.setChecked(false);
+                    switchOneMonth.setChecked(false);
+                }
+                else
+                {
+
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_24HOURS,Constants.SWITCH_24HOURS,0);
+//                    switchUpcomingSevenDays.setChecked(true);
+//                    switchTwoWeeks.setChecked(true);
+//                    switchOneMonth.setChecked(true);
+                }
+            }
+        });
         switchUpcomingSevenDays.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
-                    //If upcoming 7 days Contest switch checked, 1 is stored in sharedPreferences indicating ON
+
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_24HOURS,Constants.SWITCH_24HOURS,0);
                     Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,1);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_2WEEKS,Constants.SWITCH_2WEEKS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_1MONTH,Constants.SWITCH_1MONTH,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RUNNING,Constants.SWITCH_RUNNING,0);
+                    switchRunning.setChecked(false);
+                    switch24Hours.setChecked(false);
+                    switchTwoWeeks.setChecked(false);
+                    switchOneMonth.setChecked(false);
                 }
                 else
                 {
-                    //If upcoming 7 days Contest switch Unchecked, 0 is stored in sharedPreferences indicating ON
+
                     Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,0);
+//                    switch24Hours.setChecked(true);
+//                    switchTwoWeeks.setChecked(true);
+//                    switchOneMonth.setChecked(true);
+                }
+            }
+        });
+        switchTwoWeeks.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_24HOURS,Constants.SWITCH_24HOURS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_2WEEKS,Constants.SWITCH_2WEEKS,1);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_1MONTH,Constants.SWITCH_1MONTH,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RUNNING,Constants.SWITCH_RUNNING,0);
+                    switchRunning.setChecked(false);
+                    switchUpcomingSevenDays.setChecked(false);
+                    switch24Hours.setChecked(false);
+                    switchOneMonth.setChecked(false);
+                }
+                else
+                {
+
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_2WEEKS,Constants.SWITCH_2WEEKS,0);
+//                    switchUpcomingSevenDays.setChecked(true);
+//                    switch24Hours.setChecked(true);
+//                    switchOneMonth.setChecked(true);
+                }
+            }
+        });
+        switchOneMonth.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_24HOURS,Constants.SWITCH_24HOURS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_UPCOMING_SEVEN_DAYS,Constants.SWITCH_UPCOMING_SEVEN_DAYS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_2WEEKS,Constants.SWITCH_2WEEKS,0);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_1MONTH,Constants.SWITCH_1MONTH,1);
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_RUNNING,Constants.SWITCH_RUNNING,0);
+                    switchRunning.setChecked(false);
+                    switchUpcomingSevenDays.setChecked(false);
+                    switch24Hours.setChecked(false);
+                    switchTwoWeeks.setChecked(false);
+                }
+                else
+                {
+
+                    Methods.setPreferences(SettingsActivity.this,Constants.SWITCH_1MONTH,Constants.SWITCH_1MONTH,0);
+//                    switchUpcomingSevenDays.setChecked(true);
+//                    switch24Hours.setChecked(true);
+//                    switchTwoWeeks.setChecked(true);
                 }
             }
         });
@@ -212,7 +311,10 @@ public class SettingsActivity extends AppCompatActivity {
         switchNotification.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_NOTIFICATION, Constants.SWITCH_NOTIFICATION) != 0);
         switchRated.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED) != 0);
         switchRunning.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING) != 0);
+        switch24Hours.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_24HOURS, Constants.SWITCH_24HOURS) != 0);
         switchUpcomingSevenDays.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS) != 0);
+        switchTwoWeeks.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_2WEEKS, Constants.SWITCH_2WEEKS) != 0);
+        switchOneMonth.setChecked(Methods.getIntPreferences(SettingsActivity.this, Constants.SWITCH_1MONTH, Constants.SWITCH_1MONTH) != 0);
     }
 
     // Fixing : Back button on Appbar of settings activity won't function the expected way.
