@@ -111,8 +111,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
         holder.mDateEnd.setText(ContestObjectArrayList.get(position).getEnd());
         holder.mDateStart.setText(ContestObjectArrayList.get(position).getStart());
         holder.mDuration.setText(ContestObjectArrayList.get(position).getDuration());
-
-        Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: " + ContestObjectArrayList.get(position).getTitle());
+//        Log.e(TAG, "START>>>>: "+ ContestObjectArrayList.get(position).getStart());
+//        Log.e(TAG, "DATE>>>>: "+ ContestObjectArrayList.get(position).getStart().substring(0,10));
+        Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: " + ContestObjectArrayList.get(position).getPlatform());
 
 
         if (CheckMoreFlag.get(position)) {

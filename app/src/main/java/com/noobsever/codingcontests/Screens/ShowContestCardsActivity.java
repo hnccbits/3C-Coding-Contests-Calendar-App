@@ -28,6 +28,8 @@ import com.noobsever.codingcontests.ViewModel.RoomViewModel;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -73,60 +75,102 @@ public class ShowContestCardsActivity extends AppCompatActivity {
             public void onChanged(List<ContestObject> contestObjects) {
                 EventBus.getDefault().post(contestObjects);
                 Log.e("Objs on show card>>>>",String.valueOf(contestObjects.size()));
+                boolean running,rated,hour24,week1,week2,month1;
+                running=Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)!=0;
+                rated=Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0;
+                hour24=Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_24HOURS, Constants.SWITCH_24HOURS)!=0;
+                week1=Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS)!=0;
+                week2=Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_2WEEKS, Constants.SWITCH_2WEEKS)!=0;
+                month1=Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_1MONTH, Constants.SWITCH_1MONTH)!=0;
                 mRecyclerCodeforces.setAdapter(mCardAdapter);
                 for(ContestObject contest :contestObjects)
                 {
                     if(contest.getPlatform().toLowerCase().equals(website.toLowerCase()))
                     {
-                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)!=0
-                                || Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0
-                                || Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS)!=0)
+                        if(running ||rated || hour24 ||week1 || week2 ||month1)
                         {
-
-
-                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0
-                                && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)==0)
-                        {
-                            Toast.makeText(ShowContestCardsActivity.this, "Rated Contest", Toast.LENGTH_SHORT).show();
-                            //for filtering based on Rated Contest ONLY
-                            filterRatedContest(contest);
-
-                        }
-                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)!=0
-                        && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)==0)
-                        {
-                            //for filtering based on Running Contest ONLY
-                            Toast.makeText(ShowContestCardsActivity.this, "Running Contest", Toast.LENGTH_SHORT).show();
-                            if(contest.getStatus().equals("CODING"))
+                            /** for filtering RATED Contest*/
+                            if(rated)
                             {
-                                contestByPlatform.add(contest);
+                                    if(running)
+                                    {
+                                        if(contest.getStatus().equals("CODING"))
+                                        {
+                                            filterRatedContest(contest);
+                                        }
+                                    }
+                                    else if(hour24)
+                                    {
+                                        if(filtertime(contest,1))
+                                        {
+                                            filterRatedContest(contest);
+                                        }
+                                    }
+                                    else if(week1)
+                                    {
+                                        if(filtertime(contest,7))
+                                        {
+                                            filterRatedContest(contest);
+                                        }
+                                    }
+                                    else if(week2)
+                                    {
+                                        if(filtertime(contest,14))
+                                        {
+                                            filterRatedContest(contest);
+                                        }
+                                    }
+                                    else if(month1)
+                                    {
+                                        if(filtertime(contest,30))
+                                        {
+                                            filterRatedContest(contest);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        filterRatedContest(contest);
+                                    }
                             }
-
-                        }
-                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RUNNING, Constants.SWITCH_RUNNING)!=0
-                                && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0)
-                        {
-                            //for filtering BOTH based on Rated Contest and based on Running Contest
-                            if(contest.getStatus().equals("CODING"))
+                            /** for filtering UN-RATED Contest*/
+                             else
                             {
-                                Toast.makeText(ShowContestCardsActivity.this, "Rated & Running Contest", Toast.LENGTH_SHORT).show();
-                                filterRatedContest(contest);
-                            }
-                        }
-                        if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS)!=0
-                                && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)==0 )
-                        {
-                            Toast.makeText(ShowContestCardsActivity.this, "upcoming 7 days contest", Toast.LENGTH_SHORT).show();
-                            //Filtering UpComing 7 days Contest ONLY
-                            //TODO calculate Duration in days and STATUS="BEFORE"
-                        }
-                            if(Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_UPCOMING_SEVEN_DAYS, Constants.SWITCH_UPCOMING_SEVEN_DAYS)!=0
-                                    && Methods.getIntPreferences(ShowContestCardsActivity.this, Constants.SWITCH_RATED, Constants.SWITCH_RATED)!=0 )
-                            {
-                                Toast.makeText(ShowContestCardsActivity.this, "upcoming 7 days Rated contest", Toast.LENGTH_SHORT).show();
-                                //Filtering BOTH Rated & Upcoming Seven Days Contest
-                                //TODO calculate Duration in days and STATUS="BEFORE"
-                            }
+                                  if(running)
+                                  {
+                                      if(contest.getStatus().equals("CODING"))
+                                      {
+                                          contestByPlatform.add(contest);
+                                      }
+                                  }
+                                  else if(hour24)
+                                  {
+                                      if(filtertime(contest,1))
+                                      {
+                                          contestByPlatform.add(contest);
+                                      }
+                                  }
+                                  else if(week1)
+                                  {
+                                      if(filtertime(contest,7))
+                                      {
+                                          contestByPlatform.add(contest);
+                                      }
+                                  }
+                                  else if(week2)
+                                  {
+                                      if(filtertime(contest,14))
+                                      {
+                                          contestByPlatform.add(contest);
+                                      }
+                                  }
+                                  else if(month1)
+                                  {
+                                      if(filtertime(contest,30))
+                                      {
+                                          contestByPlatform.add(contest);
+                                      }
+                                  }
+                             }
                         }
                         else
                         {
@@ -179,12 +223,105 @@ public class ShowContestCardsActivity extends AppCompatActivity {
 
     }
 
+    private boolean filtertime(ContestObject contest,long i) {
+
+
+
+        LocalDate currentDate=LocalDate.now();
+        LocalDate contestDate=LocalDate.parse(contest.getStart().substring(0,10));
+
+        //calculating number of days remaining  for Contest
+        long noOfDaysBetween = ChronoUnit.DAYS.between(currentDate, contestDate);
+        if(noOfDaysBetween>0 && noOfDaysBetween<=i)
+            return true;
+        else
+            return false;
+
+    }
+
     private void filterRatedContest(ContestObject contest) {
 
         //TODO: implement Rated Contest Filtering (contestByPlatform.add(contest);)
         Toast.makeText(this, "Filtering Rated Contest", Toast.LENGTH_SHORT).show();
+       String platform=contest.getPlatform().toLowerCase();
+       //FOR CODECHEF
+       if(platform.equals("codechef"))
+       {
+           String[] keywords={"Cook-Off","Lunchtime","Starters","Challenge"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+       // FOR  CODEFORCES
+       else if (platform.equals("codeforces"))
+       {
+           String[] keywords={"#"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+       else if (platform.equals("hackerrank"))
+       {
+           String[] keywords={"#"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+       else if (platform.equals("hackerearth"))
+       {
+           String[] keywords={"#"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+       else if (platform.equals("spoj"))
+       {
+           String[] keywords={"#"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+       else if (platform.equals("atcoder"))
+       {
+           String[] keywords={"#"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+       else if (platform.equals("leetcode"))
+       {
+           String[] keywords={"#"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+       else if (platform.equals("kik start"))
+       {
+           String[] keywords={"#"};
+           for(String x: keywords)
+           {
+               if(contest.getTitle().contains(x))
+                   contestByPlatform.add(contest);
+           }
+       }
+
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
