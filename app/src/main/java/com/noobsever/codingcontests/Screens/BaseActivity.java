@@ -50,7 +50,7 @@ public class BaseActivity extends AppCompatActivity {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-        FirebaseMessaging.getInstance().subscribeToTopic("coding");
+
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
