@@ -1,24 +1,16 @@
 package com.noobsever.codingcontests.Screens;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import com.google.android.material.tabs.TabLayout;
-import com.noobsever.codingcontests.Adapters.CardAdapter;
 import com.noobsever.codingcontests.Adapters.PlatformsListAdapter;
-import com.noobsever.codingcontests.Models.ApiResponse;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
 import com.noobsever.codingcontests.Utils.Constants;
@@ -27,10 +19,6 @@ import com.noobsever.codingcontests.ViewModel.ApiViewModel;
 import com.noobsever.codingcontests.ViewModel.RoomViewModel;
 import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
 import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,9 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
         android:id="@+id/menu_layout"
-        android:icon="@drawable/ic_baseline_layers_24"
-        android:title="@string/change_layout"
-        app:showAsAction="ifRoom"/>
+        android:title="Notification"
+        android:icon="@drawable/vector_notification"
+        app:showAsAction="always" />
+
+<!--    <item-->
+<!--        android:id="@+id/menu_layout"-->
+<!--        android:title="Notification"-->
+<!--        android:icon="@drawable/vector_notification"-->
+<!--        app:actionViewClass="android.widget.Switch"-->
+<!--        app:showAsAction="alwa" />-->
+<!--    <item-->
+<!--        android:id="@+id/menu_layout"-->
+<!--        android:title=""-->
+<!--        android:actionLayout="@layout/notification"-->
+<!--        app:showAsAction="always" />-->
 </menu>

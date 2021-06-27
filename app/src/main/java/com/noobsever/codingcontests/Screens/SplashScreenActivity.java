@@ -1,15 +1,14 @@
 package com.noobsever.codingcontests.Screens;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,8 +17,6 @@ import com.noobsever.codingcontests.R;
 import com.noobsever.codingcontests.SignIn;
 import com.noobsever.codingcontests.Utils.Constants;
 import com.noobsever.codingcontests.Utils.Methods;
-
-import static android.content.ContentValues.TAG;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -32,7 +29,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
 //                if(loadActivity()==1 || loadActivity()==0)
-                    startActivity(new Intent(SplashScreenActivity.this, SignIn.class));
+                startActivity(new Intent(SplashScreenActivity.this, SignIn.class));
 //                else
 //                    startActivity(new Intent(SplashScreenActivity.this, LayoutTwoActivity.class));
                 finish();
@@ -41,11 +38,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         SharedPreferences sharedpreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 //        boolean firstTime= sharedpreferences.getBoolean("FirstTime",false);
-        boolean disableNotification= sharedpreferences.getBoolean("disableNotification",false);
-        boolean activatedNotification= sharedpreferences.getBoolean("activatedNotification",false);
+        boolean notificationIsOn = sharedpreferences.getBoolean("notificationIsOn", false);
+        boolean activatedNotificationFirstTime = sharedpreferences.getBoolean("activatedNotificationFirstTime", false);
 
-        if (!disableNotification){
-            if (!activatedNotification){
+        if (!activatedNotificationFirstTime) {
+            if (!notificationIsOn) {
+
 
                 FirebaseMessaging.getInstance().subscribeToTopic("hncc")
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -55,9 +53,15 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
                                 if (!task.isSuccessful()) {
-                                    editor.putBoolean("activatedNotification",false);                                }
-                                else{
-                                    editor.putBoolean("activatedNotification",true);
+                                    editor.putBoolean("activatedNotificationFirstTime", true);
+                                    editor.putBoolean("notificationIsOn", true);
+
+                                    Toast.makeText(SplashScreenActivity.this, "Subscribe Failed", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    editor.putBoolean("activatedNotificationFirstTime", true);
+                                    editor.putBoolean("notificationIsOn", true);
+
+                                    Toast.makeText(SplashScreenActivity.this, "Subscribe Success", Toast.LENGTH_SHORT).show();
                                 }
                                 editor.commit();
                             }
@@ -65,7 +69,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             }
         }
-
 
 
     }

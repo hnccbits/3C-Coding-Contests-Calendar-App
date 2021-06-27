@@ -1,12 +1,17 @@
 package com.noobsever.codingcontests.Screens;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +21,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.noobsever.codingcontests.BuildConfig;
@@ -210,6 +218,9 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.appbar_menu, menu);
+
+
+
         return true;
     }
 
@@ -217,7 +228,61 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_layout:
-                // add action
+//                Toast.makeText(this, "Hurray", Toast.LENGTH_SHORT).show();
+                SharedPreferences sharedpreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+
+                boolean notificationIsOn= sharedpreferences.getBoolean("notificationIsOn",false);
+//                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                /**revert previous state*/
+                if (notificationIsOn) {
+                    /**notification was enabled now disable it*/
+
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("hncc")
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+
+
+                                    if (task.isSuccessful()) {
+                                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                                        editor.putBoolean("notificationIsOn",false);
+                                        editor.commit();
+
+                                        Toast.makeText(BaseActivity.this, "Notification Off", Toast.LENGTH_SHORT).show();
+                                        item.setIcon(R.drawable.vector_notification_off);
+                                    }
+
+
+                                }
+                            });
+
+                }
+                else{
+
+                    FirebaseMessaging.getInstance().subscribeToTopic("hncc")
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+                                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                                        editor.putBoolean("notificationIsOn",true);
+                                        editor.commit();
+                                        Toast.makeText(BaseActivity.this, "Notification On", Toast.LENGTH_SHORT).show();
+                                        item.setIcon(R.drawable.vector_notification);
+                                    }
+
+                                }
+                            });
+                }
+//                editor.commit();
+
+
+//                item.setIcon(R.drawable.vector_notification);
+
                 break;
             case R.id.menu_search:
                 // add action

@@ -48,12 +48,12 @@ public class LayoutTwoActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
-            case R.id.menu_layout:
-                startActivity(new Intent(LayoutTwoActivity.this, LayoutOneActivity.class));
-                finishAffinity();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+//            case R.id.menu_layout:
+//                startActivity(new Intent(LayoutTwoActivity.this, LayoutOneActivity.class));
+//                finishAffinity();
+//                break;
+//            default:
+//                return super.onOptionsItemSelected(item);
         }
         return true;
     }
