@@ -26,7 +26,7 @@ public class SignIn extends AppCompatActivity {
     private static final int RC_SIGN_IN = 355;
     GoogleSignInClient mGoogleSignInClient;
     SignInButton signIn;
-    TextView details;
+//    TextView details;
     Button skip;
     Button signOut;
 
@@ -36,9 +36,9 @@ public class SignIn extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         signIn = findViewById(R.id.sign_in_button);
-        details = findViewById(R.id.text_data);
+//        details = findViewById(R.id.text_data);
         skip = findViewById(R.id.button_skip);
-        signOut = findViewById(R.id.sign_out);
+        signOut = findViewById(R.id.button_sign_out);
 
         String serverClientId = getString(R.string.web_client_id);
         // Configure sign-in to request the user's ID, email address, and basic
@@ -50,18 +50,18 @@ public class SignIn extends AppCompatActivity {
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null) {
-            String personName = account.getDisplayName();
-            String personGivenName = account.getGivenName();
-            String personFamilyName = account.getFamilyName();
-            String personEmail = account.getEmail();
-            String personId = account.getId();
-            Uri personPhoto = account.getPhotoUrl();
-
-            details.setText(personName + "\n" + personGivenName + "\n" + personFamilyName + "\n" + personEmail + "\n" + personId + "\n" + personPhoto.toString());
-
-        }
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        if (account != null) {
+//            String personName = account.getDisplayName();
+//            String personGivenName = account.getGivenName();
+//            String personFamilyName = account.getFamilyName();
+//            String personEmail = account.getEmail();
+//            String personId = account.getId();
+//            Uri personPhoto = account.getPhotoUrl();
+//
+//            details.setText(personName + "\n" + personGivenName + "\n" + personFamilyName + "\n" + personEmail + "\n" + personId + "\n" + personPhoto.toString());
+//
+//        }
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,6 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signOut();
-                details.setText("");
             }
         });
         skip.setOnClickListener(new View.OnClickListener() {
@@ -111,17 +110,17 @@ public class SignIn extends AppCompatActivity {
             // Signed in successfully, show authenticated UI.
 //            updateUI(account);
             Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
-            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-            if (acct != null) {
-                String personName = acct.getDisplayName();
-                String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
-                String personId = acct.getId();
-                Uri personPhoto = acct.getPhotoUrl();
-
-                details.setText(personName + "\n" + personGivenName + "\n" + personFamilyName + "\n" + personEmail + "\n" + personId + "\n" + personPhoto.toString());
-            }
+//            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+//            if (acct != null) {
+//                String personName = acct.getDisplayName();
+//                String personGivenName = acct.getGivenName();
+//                String personFamilyName = acct.getFamilyName();
+//                String personEmail = acct.getEmail();
+//                String personId = acct.getId();
+//                Uri personPhoto = acct.getPhotoUrl();
+//
+//                details.setText(personName + "\n" + personGivenName + "\n" + personFamilyName + "\n" + personEmail + "\n" + personId + "\n" + personPhoto.toString());
+//            }
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
