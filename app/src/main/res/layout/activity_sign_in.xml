@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ff435a64"
@@ -25,7 +24,6 @@
             android:src="@drawable/googleg_color" />
 
         <TextView
-            android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Google Sign-In"
@@ -77,21 +75,16 @@
             android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="visible"
-            tools:visibility="visible" />
+            android:layout_centerInParent="true" />
 
         <LinearLayout
-            android:id="@+id/sign_out_and_disconnect"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:visibility="visible"
-            android:gravity="right"
-            tools:visibility="visible">
+            android:gravity="right">
 
             <Button
                 android:id="@+id/button_skip"
@@ -99,9 +92,10 @@
                 android:layout_height="32sp"
                 android:text="Skip Sign in"
                 android:textSize="8sp"
-                android:textColor="@color/white"
+                android:textColor="#ffffff"
                 android:textAllCaps="false"
                 android:layout_margin="8dp"
+                android:background="#00607D8B"
                 />
             <Button
                 android:id="@+id/button_sign_out"
@@ -109,9 +103,11 @@
                 android:layout_height="32sp"
                 android:text="Sign out"
                 android:textSize="8sp"
-                android:textColor="@color/white"
+                android:textColor="#ffffff"
                 android:textAllCaps="false"
                 android:layout_margin="8dp"
+                android:background="#00607D8B"
+
                 />
 
 <!--            <Button-->

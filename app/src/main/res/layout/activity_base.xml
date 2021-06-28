@@ -22,7 +22,8 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorSurface"
+                android:background="#ffffff"
+                app:subtitleTextColor="@android:color/black"
                 android:elevation="4dp"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
                 app:title="@string/app_name"
@@ -45,6 +46,7 @@
         android:layout_gravity="start"
         android:elevation="16dp"
         android:fitsSystemWindows="true"
+        android:background="#ffffff"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu" >
 
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_light"
             android:gravity="center"
+            android:textColor="@android:color/black"
             android:text="@string/copyright" />
     </LinearLayout>
 

@@ -61,10 +61,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation 'com.airbnb.android:lottie:3.7.0'
 
     implementation 'org.greenrobot:eventbus:3.2.0'
 
-    implementation 'com.schibsted.spain:parallax-layer-layout:1.1.2'
+//    implementation 'com.schibsted.spain:parallax-layer-layout:1.1.2'
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"

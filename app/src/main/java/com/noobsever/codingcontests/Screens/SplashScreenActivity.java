@@ -34,7 +34,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 //                    startActivity(new Intent(SplashScreenActivity.this, LayoutTwoActivity.class));
                 finish();
             }
-        }, 1000);
+        }, 2000);
 
         SharedPreferences sharedpreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 //        boolean firstTime= sharedpreferences.getBoolean("FirstTime",false);

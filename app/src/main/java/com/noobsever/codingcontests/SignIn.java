@@ -1,11 +1,9 @@
 package com.noobsever.codingcontests;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +24,7 @@ public class SignIn extends AppCompatActivity {
     private static final int RC_SIGN_IN = 355;
     GoogleSignInClient mGoogleSignInClient;
     SignInButton signIn;
-//    TextView details;
+    //    TextView details;
     Button skip;
     Button signOut;
 
@@ -121,6 +119,8 @@ public class SignIn extends AppCompatActivity {
 //
 //                details.setText(personName + "\n" + personGivenName + "\n" + personFamilyName + "\n" + personEmail + "\n" + personId + "\n" + personPhoto.toString());
 //            }
+            startActivity(new Intent(SignIn.this, BaseActivity.class));
+
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -136,7 +136,7 @@ public class SignIn extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        //Do something on sign out complete
+                        Toast.makeText(SignIn.this, "Sign Out Success", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

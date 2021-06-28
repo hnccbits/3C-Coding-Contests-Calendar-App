@@ -17,8 +17,8 @@ import com.noobsever.codingcontests.Utils.Constants;
 import com.noobsever.codingcontests.Utils.Methods;
 import com.noobsever.codingcontests.ViewModel.ApiViewModel;
 import com.noobsever.codingcontests.ViewModel.RoomViewModel;
-import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
-import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
+//import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
+//import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,8 @@ public class LayoutOneActivity extends AppCompatActivity {
     RecyclerView titlesRecycler;
     /** do not comment  this*/
     PlatformsListAdapter platformsListAdapter;
-    ParallaxLayerLayout mParallaxLayout;
-    SensorTranslationUpdater sensorTranslationUpdater;
+//    ParallaxLayerLayout mParallaxLayout;
+//    SensorTranslationUpdater sensorTranslationUpdater;
     /**important for UI*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,9 @@ public class LayoutOneActivity extends AppCompatActivity {
 //        FrameLayout content = findViewById(R.id.content_frame);
 //        getLayoutInflater().inflate(R.layout.activity_layout_one, content);
 
-        mParallaxLayout = findViewById(R.id.ActivityOneParallax);
-        sensorTranslationUpdater = new SensorTranslationUpdater(this);
-       mParallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
+//        mParallaxLayout = findViewById(R.id.ActivityOneParallax);
+//        sensorTranslationUpdater = new SensorTranslationUpdater(this);
+//       mParallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
 
         // RoomDB data saving start -------------------------------------------------------------------
         mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
@@ -141,12 +141,12 @@ public class LayoutOneActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        sensorTranslationUpdater.registerSensorManager();
+//        sensorTranslationUpdater.registerSensorManager();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        sensorTranslationUpdater.unregisterSensorManager();
+//        sensorTranslationUpdater.unregisterSensorManager();
     }
 }
