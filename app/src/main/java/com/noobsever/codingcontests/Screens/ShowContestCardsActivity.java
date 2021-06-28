@@ -202,7 +202,7 @@ public class ShowContestCardsActivity extends AppCompatActivity {
             case Constants.SPOJ:
                 mContestImage.setImageDrawable(getResources().getDrawable(R.drawable.spoj2));
                 break;
-            case Constants.GOOGLE:
+            case Constants.GOOGLE2:
                 mContestImage.setImageDrawable(getResources().getDrawable(R.drawable.google2));
                 break;
             case Constants.ATCODER:
@@ -242,7 +242,7 @@ public class ShowContestCardsActivity extends AppCompatActivity {
     private void filterRatedContest(ContestObject contest) {
 
         //TODO: implement Rated Contest Filtering (contestByPlatform.add(contest);)
-        Toast.makeText(this, "Filtering Rated Contest", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Filtering Rated Contest", Toast.LENGTH_SHORT).show();
        String platform=contest.getPlatform().toLowerCase();
        //FOR CODECHEF
        if(platform.equals("codechef"))
@@ -266,16 +266,17 @@ public class ShowContestCardsActivity extends AppCompatActivity {
        }
        else if (platform.equals("hackerrank"))
        {
-           String[] keywords={"#"};
-           for(String x: keywords)
-           {
-               if(contest.getTitle().contains(x))
-                   contestByPlatform.add(contest);
-           }
+           Toast.makeText(this, "NO RATED CONTEST:(", Toast.LENGTH_SHORT).show();
+//           String[] keywords={"#"};
+//           for(String x: keywords)
+//           {
+//               if(contest.getTitle().contains(x))
+//                   contestByPlatform.add(contest);
+//           }
        }
        else if (platform.equals("hackerearth"))
        {
-           String[] keywords={"#"};
+           String[] keywords={"hiring", "challenge"};
            for(String x: keywords)
            {
                if(contest.getTitle().contains(x))
@@ -284,16 +285,17 @@ public class ShowContestCardsActivity extends AppCompatActivity {
        }
        else if (platform.equals("spoj"))
        {
-           String[] keywords={"#"};
-           for(String x: keywords)
-           {
-               if(contest.getTitle().contains(x))
-                   contestByPlatform.add(contest);
-           }
+           Toast.makeText(this, "NO RATED CONTEST:(", Toast.LENGTH_SHORT).show();
+//           String[] keywords={"#"};
+//           for(String x: keywords)
+//           {
+//               if(contest.getTitle().contains(x))
+//                   contestByPlatform.add(contest);
+//           }
        }
        else if (platform.equals("atcoder"))
        {
-           String[] keywords={"#"};
+           String[] keywords={"heuristic","beginner","grand","regular"};
            for(String x: keywords)
            {
                if(contest.getTitle().contains(x))
@@ -302,16 +304,16 @@ public class ShowContestCardsActivity extends AppCompatActivity {
        }
        else if (platform.equals("leetcode"))
        {
-           String[] keywords={"#"};
+           String[] keywords={"weekly","biweekly"};
            for(String x: keywords)
            {
                if(contest.getTitle().contains(x))
                    contestByPlatform.add(contest);
            }
        }
-       else if (platform.equals("kik start"))
+       else if (platform.equals("kick start"))
        {
-           String[] keywords={"#"};
+           String[] keywords={"Round"};
            for(String x: keywords)
            {
                if(contest.getTitle().contains(x))
