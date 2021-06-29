@@ -48,18 +48,6 @@ public class SignIn extends AppCompatActivity {
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        if (account != null) {
-//            String personName = account.getDisplayName();
-//            String personGivenName = account.getGivenName();
-//            String personFamilyName = account.getFamilyName();
-//            String personEmail = account.getEmail();
-//            String personId = account.getId();
-//            Uri personPhoto = account.getPhotoUrl();
-//
-//            details.setText(personName + "\n" + personGivenName + "\n" + personFamilyName + "\n" + personEmail + "\n" + personId + "\n" + personPhoto.toString());
-//
-//        }
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +64,7 @@ public class SignIn extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignIn.this, BaseActivity.class));
+                startActivity(new Intent(SignIn.this, DrawerActivity.class));
 
             }
         });

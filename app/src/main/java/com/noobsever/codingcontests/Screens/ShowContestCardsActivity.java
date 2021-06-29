@@ -3,6 +3,7 @@ package com.noobsever.codingcontests.Screens;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+//import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -50,13 +51,17 @@ public class ShowContestCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_contest_cards);
 
+//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+//
+//        getActionBar().setTitle("Contests");
+
         mContestImage = findViewById(R.id.contest_image);
 
-        toolbar = findViewById(R.id.app_bar_of_cards);
-        setSupportActionBar(toolbar);
+//        toolbar = findViewById(R.id.app_bar_of_cards);
+//        setSupportActionBar(toolbar);
         website = getIntent().getStringExtra(Constants.WEBSITE);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(website);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        Objects.requireNonNull(getSupportActionBar()).setTitle(website);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if(website.equals(Constants.GOOGLE))
         {
             website="Kick Start";       // due to API result ,for Google

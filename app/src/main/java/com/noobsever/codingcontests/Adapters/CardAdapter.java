@@ -2,6 +2,7 @@ package com.noobsever.codingcontests.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Log;
@@ -9,16 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
 
@@ -30,6 +31,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterViewHolder> implements Filterable {
+
+    private String[] dark ={"#ff2bc8d9","#ffff9b2b","#ff948bfe","#fffe6d6e"};
+    private String[] light={"#ffd9f5f8","#ffffedd9","#ffeceaff","#ffffe5e6"};
 
     public final String TAG = "MyTag";
     private List<ContestObject> ContestObjectArrayList;
@@ -100,7 +104,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
     @Override
     public void onBindViewHolder(@NonNull final CardAdapterViewHolder holder, final int position) {
 
-
+        holder.viewHolder.setBackgroundColor(Color.parseColor(light[position%4]));
+        holder.mRoundName.setTextColor(Color.parseColor(dark[position%4]));
         holder.mCard.setAnimation(AnimationUtils.loadAnimation(context,R.anim.pop_in));
         Log.e("Platform>>>", " "+ContestObjectArrayList.get(position).getPlatform() );
         Log.e("Total Objs>>>", "size: "+ ContestObjectArrayList.size() );
@@ -116,52 +121,52 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
         Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: " + ContestObjectArrayList.get(position).getPlatform());
 
 
-        if (CheckMoreFlag.get(position)) {
-            holder.mShare.show();
-            holder.mNotification.show();
-            holder.mReminder.show();
-        } else {
-            holder.mShare.hide();
-            holder.mNotification.hide();
-            holder.mReminder.hide();
-        }
+//        if (CheckMoreFlag.get(position)) {
+//            holder.mShare.show();
+//            holder.mNotification.show();
+//            holder.mReminder.show();
+//        } else {
+//            holder.mShare.hide();
+//            holder.mNotification.hide();
+//            holder.mReminder.hide();
+//        }
 
-        holder.mCard.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
+//        holder.mCard.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//
+//                if (CheckMoreFlag.get(position)) {
+//                    holder.mShare.hide();
+//                    holder.mNotification.hide();
+//                    holder.mReminder.hide();
+//                } else {
+//                    holder.mShare.show();
+//                    holder.mNotification.show();
+//                    holder.mReminder.show();
+//                }
+//                CheckMoreFlag.set(position, !CheckMoreFlag.get(position));
+//
+//                return true;
+//            }
+//        });
+//
+//        holder.mMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (CheckMoreFlag.get(position)) {
+//                    holder.mShare.hide();
+//                    holder.mNotification.hide();
+//                    holder.mReminder.hide();
+//                } else {
+//                    holder.mShare.show();
+//                    holder.mNotification.show();
+//                    holder.mReminder.show();
+//                }
+//                CheckMoreFlag.set(position, !CheckMoreFlag.get(position));
+//            }
+//        });
 
-                if (CheckMoreFlag.get(position)) {
-                    holder.mShare.hide();
-                    holder.mNotification.hide();
-                    holder.mReminder.hide();
-                } else {
-                    holder.mShare.show();
-                    holder.mNotification.show();
-                    holder.mReminder.show();
-                }
-                CheckMoreFlag.set(position, !CheckMoreFlag.get(position));
-
-                return true;
-            }
-        });
-
-        holder.mMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (CheckMoreFlag.get(position)) {
-                    holder.mShare.hide();
-                    holder.mNotification.hide();
-                    holder.mReminder.hide();
-                } else {
-                    holder.mShare.show();
-                    holder.mNotification.show();
-                    holder.mReminder.show();
-                }
-                CheckMoreFlag.set(position, !CheckMoreFlag.get(position));
-            }
-        });
-
-        holder.mShare.setOnClickListener(new View.OnClickListener() {
+        holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(context, "Implement Share " + position, Toast.LENGTH_SHORT).show();
@@ -190,7 +195,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
 
             }
         });
-        holder.mNotification.setOnClickListener(new View.OnClickListener() {
+        holder.openLinkInBrowser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(context, "Implement Notification " + position, Toast.LENGTH_SHORT).show();
@@ -200,7 +205,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
                 context.startActivity(i);
             }
         });
-        holder.mReminder.setOnClickListener(new View.OnClickListener() {
+        holder.calendarReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(context,ContestObjectArrayList.get(position).toString(),Toast.LENGTH_SHORT).show();
@@ -240,9 +245,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
         private final TextView mRoundName;
         private final TextView mDateStart;
         private final TextView mDateEnd, mDuration;
-        private final MaterialCardView mCard;
-        private final FloatingActionButton mShare, mNotification, mReminder;
-        private final ImageView mMore;
+        private final CardView mCard;
+        private final Button openLinkInBrowser, calendarReminder, share;
+        LinearLayout viewHolder;
+//        private final ImageView mMore;
 
         public CardAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -250,11 +256,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
             mDateStart = itemView.findViewById(R.id.date_start);
             mDateEnd = itemView.findViewById(R.id.date_end);
             mCard = itemView.findViewById(R.id.card);
-            mShare = itemView.findViewById(R.id.fab_share);
-            mNotification = itemView.findViewById(R.id.fab_notification);
-            mReminder = itemView.findViewById(R.id.fab_reminder);
-            mMore = itemView.findViewById(R.id.more_option);
+            openLinkInBrowser = itemView.findViewById(R.id.open_link_in_browser);
+            calendarReminder = itemView.findViewById(R.id.set_reminder);
+            share = itemView.findViewById(R.id.share_in_whatsapp);
+//            mMore = itemView.findViewById(R.id.more_option);
             mDuration = itemView.findViewById(R.id.duration);
+            viewHolder=itemView.findViewById(R.id.contest_detail_view_holder);
         }
 
     }

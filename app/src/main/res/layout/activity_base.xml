@@ -9,27 +9,10 @@
     tools:context=".Screens.BaseActivity"
     tools:openDrawer="start">
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#ffffff"
-                app:subtitleTextColor="@android:color/black"
-                android:elevation="4dp"
-                app:navigationIcon="@drawable/ic_baseline_menu_24"
-                app:title="@string/app_name"
-                app:titleTextColor="?attr/colorOnSurface"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/content_frame"

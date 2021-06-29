@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/side_nav_bar"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="48dp"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@string/nav_header_desc"
+            android:paddingTop="@dimen/nav_header_vertical_spacing" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:text="User Name"
+                android:textSize="32sp"
+                android:maxLines="1"
+                android:autoSizeTextType="uniform"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="emailid@provider.com"
+                android:maxLines="1"
+                android:autoSizeTextType="uniform"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".Screens.SettingsActivity"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:text="@string/contest_platforms"
+                        android:textColor="#000000"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/cb_codeforces"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:tag="@string/codeforces"
+                        android:textSize="18sp"
+                        android:text="@string/codeforces"/>
+                    <CheckBox
+                        android:id="@+id/cb_codechef"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textSize="18sp"
+                        android:tag="@string/codechef"
+                        android:text="@string/codechef"/>
+                    <CheckBox
+                        android:id="@+id/cb_hackerrank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textSize="18sp"
+                        android:tag="@string/hackerrank"
+                        android:text="@string/hackerrank"/>
+                    <CheckBox
+                        android:id="@+id/cb_hackerearth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textSize="18sp"
+                        android:tag="@string/hackerearth"
+                        android:text="@string/hackerearth"/>
+                    <CheckBox
+                        android:id="@+id/cb_spoj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textSize="18sp"
+                        android:tag="@string/spoj"
+                        android:text="@string/spoj"/>
+                    <CheckBox
+                        android:id="@+id/cb_atcoder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textSize="18sp"
+                        android:tag="@string/atcoder"
+                        android:text="@string/atcoder"/>
+                    <CheckBox
+                        android:id="@+id/cb_leetcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textSize="18sp"
+                        android:tag="@string/leetcode"
+                        android:text="@string/leetcode"/>
+                    <CheckBox
+                        android:id="@+id/cb_google"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textSize="18sp"
+                        android:tag="@string/google"
+                        android:text="@string/google"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/switch_ratedcontest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Rated Contests"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_runningcontest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Running Contests"/>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:text="Upcoming Contest in"
+                        />
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/switch_24Hours"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="24 Hours"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/switch_upcoming1week"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="1 week"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_twoWeeks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="2 weeks"/>
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_oneMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="1 month"/>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:text="@string/time_format"
+                        />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/switch_12_time_format"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="@string/hr_12_format"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_24_time_format"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="@string/hr_24_format"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:text="@string/notification"
+                        />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/switch_notification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="@string/enable_notif"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                >
+
+                <!--    <LinearLayout-->
+                <!--        android:layout_width="match_parent"-->
+                <!--        android:layout_height="wrap_content"-->
+                <!--        android:orientation="vertical"-->
+                <!--        android:padding="16dp">-->
+
+                <!--        <TextView-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:textSize="22sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:text="@string/contest_duration"-->
+                <!--            android:textColor="@color/white"-->
+                <!--            />-->
+
+                <!--        <RadioGroup-->
+                <!--            android:layout_marginTop="10dp"-->
+                <!--            android:id="@+id/radioGroup"-->
+                <!--            android:checkedButton="@+id/rb_week_1"-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="wrap_content">-->
+                <!--            <RadioButton-->
+                <!--                android:textSize="18sp"-->
+                <!--                android:id="@+id/rb_week_1"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:text="@string/week_1"/>-->
+                <!--            <RadioButton-->
+                <!--                android:textSize="18sp"-->
+                <!--                android:id="@+id/rb_week_2"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:text="@string/week_2"/>-->
+                <!--            <RadioButton-->
+                <!--                android:textSize="18sp"-->
+                <!--                android:id="@+id/rb_month_1"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:text="@string/month_1"/>-->
+                <!--        </RadioGroup>-->
+
+                <!--    </LinearLayout>-->
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    
+    
+</LinearLayout>

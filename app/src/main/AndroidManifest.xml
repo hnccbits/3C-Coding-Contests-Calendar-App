@@ -22,7 +22,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SignIn"></activity>
+        <activity android:name=".DrawerActivity">
+
+            <!--             <intent-filter>-->
+            <!--             <action android:name="android.intent.action.MAIN" />-->
+            <!--             <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--             </intent-filter>-->
+
+        </activity>
+        <activity android:name=".SignIn" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -68,15 +76,19 @@
                 <data android:mimeType="vnd.android.cursor.dir/event" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+
+                <!--                <action android:name="android.intent.action.MAIN" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+
             </intent-filter>
         </activity>
         <activity
             android:name=".Screens.SettingsActivity"
             android:parentActivityName=".Screens.BaseActivity" />
         <activity android:name=".Screens.SplashScreenActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

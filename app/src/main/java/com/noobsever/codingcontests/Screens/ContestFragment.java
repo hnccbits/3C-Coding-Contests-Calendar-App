@@ -100,7 +100,7 @@ public class ContestFragment extends Fragment {
         }
 
         titlesRecycler = getActivity().findViewById(R.id.titles_recycler_view);
-        titlesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        titlesRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         platformsListAdapter = new PlatformsListAdapter(getContext(),mTabItemList);
         titlesRecycler.setAdapter(platformsListAdapter);
 

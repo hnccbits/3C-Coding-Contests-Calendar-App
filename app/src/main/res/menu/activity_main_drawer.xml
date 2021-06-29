@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_one"
-    >
+    tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single"
-        >
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/navigation_setting" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/vector_home"
+            android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_notifications"
-            android:icon="@drawable/ic_baseline_notifications_24"
-            android:title="Notification" />
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/vector_notification"
+            android:title="@string/menu_gallery" />
         <item
-            android:id="@+id/nav_help"
-            android:icon="@drawable/ic_baseline_help_24"
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/vactor_faq"
             android:title="FAQ's" />
     </group>
-
     <item android:title="@string/communicate">
         <menu>
             <item
@@ -37,5 +33,4 @@
                 android:title="@string/navigation_opensource" />
         </menu>
     </item>
-
 </menu>
