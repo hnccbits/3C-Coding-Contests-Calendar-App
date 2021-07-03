@@ -36,6 +36,7 @@ public class SignIn extends AppCompatActivity {
         skip = findViewById(R.id.button_skip);
         signOut = findViewById(R.id.button_sign_out);
 
+        // serverClientId is seperate for every integrated signh In. It is just like a Token.
         String serverClientId = getString(R.string.web_client_id);
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -53,7 +54,7 @@ public class SignIn extends AppCompatActivity {
                 signIn();
             }
         });
-        signOut.setOnClickListener(new View.OnClickListener() {
+        signOut.setOnClickListener(new View.OnClickListener() { // sign out button is invisibe for now
             @Override
             public void onClick(View v) {
                 signOut();
@@ -101,7 +102,7 @@ public class SignIn extends AppCompatActivity {
              * and then switch Activity*/
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(SignIn.this, BaseActivity.class));
+            startActivity(new Intent(SignIn.this, DrawerActivity.class));
 
 
         } catch (ApiException e) {
