@@ -107,6 +107,7 @@
                 android:textAllCaps="false"
                 android:layout_margin="8dp"
                 android:background="#00607D8B"
+                android:visibility="invisible"
 
                 />
 
