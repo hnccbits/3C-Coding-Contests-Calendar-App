@@ -111,7 +111,6 @@ public class Methods {
         sharedPreferencesEditor.putLong(storeKey,value);
         sharedPreferencesEditor.apply();
     }
-
     /** Method below is intended to return a List<String> for fetching the SharedPreferences */
     public static List<String> fetchTabItems(Context context) {
         ArrayList<String> savedTabItems = new ArrayList<>();
