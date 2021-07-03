@@ -1,7 +1,7 @@
 # 3C-Coding-Contests-Calendar-App
 3C is an app which can give notifications of coding competitions scheduled in leading coding practice platforms like CodeChef, CodeForces, SPOJ, Altcoder, TopCoder,HackerEarth, HackerRank etc. Using this app one can directly set / add a reminder for the event in google calendar also the events can be sharable in different apps. 
 <br>
-<img src="./applogo2.png" alt="applogo" width="500" height="500">
+<img src="./applogo2.png" alt="applogo" width="300" height="300">
 <h2> Tools, Technology and Software used </h2>
 
 <ul>
