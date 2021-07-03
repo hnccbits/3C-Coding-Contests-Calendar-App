@@ -75,9 +75,4 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
     }
-
-    //  Function to get the last opened activity.
-    int loadActivity() {
-        return Methods.getIntPreferences(getApplicationContext(), Constants.LAYOUT_SWITCH_KEY, Constants.CURRENT_ACTIVITY);
-    }
 }

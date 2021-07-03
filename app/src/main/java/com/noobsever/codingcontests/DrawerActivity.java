@@ -47,9 +47,11 @@ import java.util.List;
 
 
 public class DrawerActivity extends AppCompatActivity {
-    // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete
+    // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
     // TODO: Remove all libraries that are not in use
-    // TODO Everywhere in the App show all images using Glide
+    // TODO: Everywhere in the App show all images using Glide
+    // TODO: Remove all deprecated menthods
+    // TODO: Reduce MIN SDK from 26. At least Marshmallow or KitKat should be able to run it.
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
