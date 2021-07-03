@@ -97,7 +97,7 @@ public class DrawerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        if(drawer!=null && drawer instanceof DrawerLayout){
+        if(drawer!=null && drawer instanceof DrawerLayout ){
             DrawerLayout mDrawer=(DrawerLayout)drawer;
             mDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
                 @Override
@@ -113,9 +113,11 @@ public class DrawerActivity extends AppCompatActivity {
                 @Override
                 public void onDrawerClosed(@NonNull @NotNull View drawerView) {
                     saveCheckBox();
-                    finish();
-                    startActivity(new Intent(DrawerActivity.this, DrawerActivity.class));
-                    overridePendingTransition(0, 0);
+                    if(navController.getCurrentDestination().getId()==R.id.nav_home) {
+                        finish();
+                        startActivity(new Intent(DrawerActivity.this, DrawerActivity.class));
+                        overridePendingTransition(0, 0);
+                    }
                 }
 
                 @Override
@@ -542,12 +544,10 @@ public class DrawerActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //        switch (item.getItemId()) {
-//            case android.R.id.home:
-////                onBackPressed();
+//            case android.R.id.home: ;
 //                return true;
-//
 //            default:
-//                return super.onOptionsItemSelected(item);
+//                return false;
 //        }
         return super.onOptionsItemSelected(item);
     }
