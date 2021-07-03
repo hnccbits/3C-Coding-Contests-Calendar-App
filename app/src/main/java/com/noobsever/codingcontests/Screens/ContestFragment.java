@@ -56,9 +56,7 @@ public class ContestFragment extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.e("OnFragment>>>", "onActivityCreated: "+" ContestFragment" );
-//        mParallaxLayout = getActivity().findViewById(R.id.ActivityOneParallax);
-//        sensorTranslationUpdater = new SensorTranslationUpdater(getContext());
-//        mParallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
+
 
         // RoomDB data saving start -------------------------------------------------------------------
         mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);

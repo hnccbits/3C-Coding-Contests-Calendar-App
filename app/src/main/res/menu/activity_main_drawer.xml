@@ -31,6 +31,10 @@
                 android:id="@+id/nav_open"
                 android:icon="@drawable/ic_baseline_favorite_border_24"
                 android:title="@string/navigation_opensource" />
+            <item
+                android:id="@+id/nav_contributor"
+                android:icon="@drawable/ic_round_code_24"
+                android:title="@string/navigation_contributors" />
         </menu>
     </item>
 </menu>

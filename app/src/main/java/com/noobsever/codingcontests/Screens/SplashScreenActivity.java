@@ -26,25 +26,28 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(
                 R.layout.activity_splash_screen);
 
+        /**Show splash Screen UI for 2000 milliseconds and then change move to SignIn Activity*/
         new Handler().postDelayed(new Runnable() {
             public void run() {
-//                if(loadActivity()==1 || loadActivity()==0)
                 startActivity(new Intent(SplashScreenActivity.this, SignIn.class));
-//                else
-//                    startActivity(new Intent(SplashScreenActivity.this, LayoutTwoActivity.class));
-                finish();
+                finish(); // kill SplashScreenActivity.java activity to save memory
             }
         }, 2000);
 
+        /** When app is opened for the first time it send firebase to subscrice to topic 'hncc'
+         * This topic is used to push notification to app from Firebase
+         * For the first time user should subscribe to to this topic
+         * If Internet is down/off save its state in 'activatedNotificationFirstTime' and retry the next time user opens app
+         *
+         * 'notificationIsOn' saves if notification is on/off irrespective of using the app for first time or nth timt */
         SharedPreferences sharedpreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-//        boolean firstTime= sharedpreferences.getBoolean("FirstTime",false);
         boolean notificationIsOn = sharedpreferences.getBoolean("notificationIsOn", false);
         boolean activatedNotificationFirstTime = sharedpreferences.getBoolean("activatedNotificationFirstTime", false);
 
         if (!activatedNotificationFirstTime) {
             if (!notificationIsOn) {
 
-
+                /* subscribe to topic and check for success or failure and then save your state.*/
                 FirebaseMessaging.getInstance().subscribeToTopic("hncc")
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -71,10 +74,5 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
 
 
-    }
-
-    //  Function to get the last opened activity.
-    int loadActivity() {
-        return Methods.getIntPreferences(getApplicationContext(), Constants.LAYOUT_SWITCH_KEY, Constants.CURRENT_ACTIVITY);
     }
 }

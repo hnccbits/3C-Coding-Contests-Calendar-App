@@ -1,11 +1,7 @@
 package com.noobsever.codingcontests;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -39,26 +35,27 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.noobsever.codingcontests.Models.ContestObject;
-import com.noobsever.codingcontests.Screens.BaseActivity;
 import com.noobsever.codingcontests.Utils.Constants;
 import com.noobsever.codingcontests.Utils.Methods;
 import com.noobsever.codingcontests.ViewModel.ApiViewModel;
 import com.noobsever.codingcontests.ViewModel.RoomViewModel;
 import com.noobsever.codingcontests.databinding.ActivityDrawerBinding;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import retrofit2.http.Url;
-
 
 public class DrawerActivity extends AppCompatActivity {
-
+    // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
+    // TODO: Remove all libraries that are not in use
+    // TODO: Everywhere in the App show all images using Glide
+    // TODO: Remove all deprecated menthods
+    // TODO: Reduce MIN SDK from 26. At least Marshmallow or KitKat should be able to run it.
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
+    //TODO: Make all variables private
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -66,7 +63,7 @@ public class DrawerActivity extends AppCompatActivity {
     RoomViewModel mRoomViewModel;
     boolean doubleBackPressExitOnce = false;
     ImageView profilePicture;
-    TextView emailId,name;
+    TextView emailId, name;
 
     private CheckBox cforces, cchef, hrank, hearth, spoj, atcoder, leetcode, google;
     private SwitchMaterial switchTwelve, switchTwentyFour, switchNotification, switchRated, switchRunning, switch24Hours, switchUpcomingSevenDays, switchTwoWeeks, switchOneMonth;
@@ -76,19 +73,14 @@ public class DrawerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /** View Binding done automatically by Android Template*/
         binding = ActivityDrawerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarDrawer.toolbar);
-//        binding.appBarDrawer.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -99,16 +91,17 @@ public class DrawerActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        /** Access complete Nav Drawer */
         View header = navigationView.getHeaderView(0);
 
         initHeaderView(header);
-
+        // TODO: Checkbox in Navigation Drawer doesn't update. It has bugs. Fix it before production.
         checkedItem = new ArrayList<>();
 
         try {
             checkedItem = (ArrayList<String>) Methods.fetchTabItems(this);
 
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         handleSettingsInNavDrawer();
@@ -117,6 +110,9 @@ public class DrawerActivity extends AppCompatActivity {
         apiViewModel = new ViewModelProvider(this).get(ApiViewModel.class);
         apiViewModel.init();
 
+        /**Since Internet is necessary for App to function
+         * Check if Internet is Available
+         * */
         new Methods.InternetCheck(this).isInternetConnectionAvailable(new Methods.InternetCheck.InternetCheckListener() {
             @Override
             public void onComplete(boolean connected) {
@@ -162,14 +158,14 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     private void handleSettingsInNavDrawer() {
-
+        /** Set Profile Picture, User Name and Email Address in Navigation Drawer */
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             String personEmail = account.getEmail();
             emailId.setText(personEmail);
-            name.setText(account.getGivenName()+" "+account.getFamilyName());
-            Glide.with(this).load(account.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(profilePicture);
-//            Log.d("MyTag", "Hello"+account.getEmail()+" <<>> "+account.getPhotoUrl());
+
+            name.setText(account.getGivenName() + " " + account.getFamilyName());
+            Glide.with(this).load(account.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(profilePicture);// show Image using glide
         }
 
         restoreCheckBoxState();
@@ -339,7 +335,7 @@ public class DrawerActivity extends AppCompatActivity {
                 SharedPreferences sharedpreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
 
-                boolean notificationIsOn= sharedpreferences.getBoolean("notificationIsOn",false);
+                boolean notificationIsOn = sharedpreferences.getBoolean("notificationIsOn", false);
                 if (!isChecked)
                 /**notification was enabled now disable it*/
 
@@ -349,10 +345,9 @@ public class DrawerActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
 
 
-
                                     if (task.isSuccessful()) {
                                         SharedPreferences.Editor editor = sharedpreferences.edit();
-                                        editor.putBoolean("notificationIsOn",false);
+                                        editor.putBoolean("notificationIsOn", false);
                                         editor.commit();
 
                                         Toast.makeText(DrawerActivity.this, "Notification Off", Toast.LENGTH_SHORT).show();
@@ -363,15 +358,17 @@ public class DrawerActivity extends AppCompatActivity {
                                 }
                             });
                     //If notification switch ON, 0 is stored in sharedPreferences
-                else{
+                else {
+                    /** Notification was disabled now enable it
+                     * unsubscribe from topic 'hncc'
+                     * On Action Successful save your state using SharedPreferences */
                     FirebaseMessaging.getInstance().subscribeToTopic("hncc")
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-
                                     if (task.isSuccessful()) {
                                         SharedPreferences.Editor editor = sharedpreferences.edit();
-                                        editor.putBoolean("notificationIsOn",true);
+                                        editor.putBoolean("notificationIsOn", true);
                                         editor.commit();
                                         Toast.makeText(DrawerActivity.this, "Notification On", Toast.LENGTH_SHORT).show();
                                         Methods.setPreferences(DrawerActivity.this, Constants.SWITCH_NOTIFICATION, Constants.SWITCH_NOTIFICATION, 0);
@@ -384,6 +381,7 @@ public class DrawerActivity extends AppCompatActivity {
         });
     }
 
+    // TODO: If Navigation Drawer is Open and the user presses back button then the list should update
 //    @Override
 //    public void onBackPressed() {
 //        super.onBackPressed();

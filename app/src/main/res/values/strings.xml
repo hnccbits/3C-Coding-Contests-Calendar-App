@@ -7,6 +7,7 @@
     <string name="navigation_share">Share Us</string>
     <string name="navigation_suggest">Feedback</string>
     <string name="navigation_opensource">Open Source</string>
+    <string name="navigation_contributors">Contributors</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="codeforces">Codeforces</string>
