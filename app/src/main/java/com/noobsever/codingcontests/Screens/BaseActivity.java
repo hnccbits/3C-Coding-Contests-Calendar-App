@@ -144,6 +144,18 @@ public class BaseActivity extends AppCompatActivity {
                                     }
                                 }, 500);
                                 break;
+                            case R.id.nav_contributor:
+                                drawerLayout.closeDrawers();
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
+                                        Toast.makeText(BaseActivity.this, "Contributors", Toast.LENGTH_SHORT).show();
+//                                        Uri uri = Uri.parse("https://github.com/hnccbits/3C-Coding-Contests-Calendar-App");
+//                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                                        startActivity(intent);
+                                        startActivity(new Intent(BaseActivity.this,DevelopersActivity.class));
+                                    }
+                                }, 500);
+                                break;
                         }
                         return true;
                     }
