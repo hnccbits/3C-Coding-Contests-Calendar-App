@@ -48,6 +48,8 @@ import java.util.List;
 
 public class DrawerActivity extends AppCompatActivity {
     // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete
+    // TODO: Remove all libraries that are not in use
+    // TODO Everywhere in the App show all images using Glide
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
