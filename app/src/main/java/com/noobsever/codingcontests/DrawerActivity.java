@@ -101,27 +101,7 @@ public class DrawerActivity extends AppCompatActivity {
 
         View header = navigationView.getHeaderView(0);
 
-        cforces = header.findViewById(R.id.cb_codeforces);
-        cchef = header.findViewById(R.id.cb_codechef);
-        hrank = header.findViewById(R.id.cb_hackerrank);
-        hearth = header.findViewById(R.id.cb_hackerearth);
-        spoj = header.findViewById(R.id.cb_spoj);
-        atcoder = header.findViewById(R.id.cb_atcoder);
-        leetcode = header.findViewById(R.id.cb_leetcode);
-        google = header.findViewById(R.id.cb_google);
-        switchTwelve = header.findViewById(R.id.switch_12_time_format);
-        switchTwentyFour = header.findViewById(R.id.switch_24_time_format);
-        switchNotification = header.findViewById(R.id.switch_notification);
-        switchRated = header.findViewById(R.id.switch_ratedcontest);
-        switchRunning = header.findViewById(R.id.switch_runningcontest);
-        switch24Hours = header.findViewById(R.id.switch_24Hours);
-        switchUpcomingSevenDays = header.findViewById(R.id.switch_upcoming1week);
-        switchTwoWeeks = header.findViewById(R.id.switch_twoWeeks);
-        switchOneMonth = header.findViewById(R.id.switch_oneMonth);
-        profilePicture=header.findViewById(R.id.profile_picture);
-        emailId=header.findViewById(R.id.profile_email);
-        name=header.findViewById(R.id.profile_name);
-
+        initHeaderView(header);
 
         checkedItem = new ArrayList<>();
 
@@ -132,9 +112,6 @@ public class DrawerActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         handleSettingsInNavDrawer();
-
-
-
 
         mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
         apiViewModel = new ViewModelProvider(this).get(ApiViewModel.class);
@@ -161,6 +138,29 @@ public class DrawerActivity extends AppCompatActivity {
         });
     }
 
+    private void initHeaderView(View header){
+        cforces = header.findViewById(R.id.cb_codeforces);
+        cchef = header.findViewById(R.id.cb_codechef);
+        hrank = header.findViewById(R.id.cb_hackerrank);
+        hearth = header.findViewById(R.id.cb_hackerearth);
+        spoj = header.findViewById(R.id.cb_spoj);
+        atcoder = header.findViewById(R.id.cb_atcoder);
+        leetcode = header.findViewById(R.id.cb_leetcode);
+        google = header.findViewById(R.id.cb_google);
+        switchTwelve = header.findViewById(R.id.switch_12_time_format);
+        switchTwentyFour = header.findViewById(R.id.switch_24_time_format);
+        switchNotification = header.findViewById(R.id.switch_notification);
+        switchRated = header.findViewById(R.id.switch_ratedcontest);
+        switchRunning = header.findViewById(R.id.switch_runningcontest);
+        switch24Hours = header.findViewById(R.id.switch_24Hours);
+        switchUpcomingSevenDays = header.findViewById(R.id.switch_upcoming1week);
+        switchTwoWeeks = header.findViewById(R.id.switch_twoWeeks);
+        switchOneMonth = header.findViewById(R.id.switch_oneMonth);
+        profilePicture=header.findViewById(R.id.profile_picture);
+        emailId=header.findViewById(R.id.profile_email);
+        name=header.findViewById(R.id.profile_name);
+    }
+
     private void handleSettingsInNavDrawer() {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -170,9 +170,6 @@ public class DrawerActivity extends AppCompatActivity {
             name.setText(account.getGivenName()+" "+account.getFamilyName());
             Glide.with(this).load(account.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(profilePicture);
 //            Log.d("MyTag", "Hello"+account.getEmail()+" <<>> "+account.getPhotoUrl());
-
-
-
         }
 
         restoreCheckBoxState();

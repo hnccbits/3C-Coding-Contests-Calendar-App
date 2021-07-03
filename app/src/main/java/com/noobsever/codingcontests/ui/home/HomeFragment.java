@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.gson.Gson;
 import com.noobsever.codingcontests.R;
 import com.noobsever.codingcontests.Screens.LayoutTwoActivity;
 import com.noobsever.codingcontests.databinding.FragmentHomeBinding;
@@ -125,7 +126,6 @@ public class HomeFragment extends Fragment {
 //
         try {
             mTabItemList = (ArrayList<String>) Methods.fetchTabItems( context);
-
         }catch (NullPointerException e) {
             e.printStackTrace();
             // Displays all tabs by Default.
