@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ShowContestCardsActivity extends AppCompatActivity {
-
+    // TODO: Make all variables Private
     Toolbar toolbar;
     private RecyclerView mRecyclerCodeforces;
     private CardAdapter mCardAdapter;
@@ -51,21 +51,14 @@ public class ShowContestCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_contest_cards);
 
-//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-//
-//        getActionBar().setTitle("Contests");
-
         mContestImage = findViewById(R.id.contest_image);
-
-//        toolbar = findViewById(R.id.app_bar_of_cards);
-//        setSupportActionBar(toolbar);
         website = getIntent().getStringExtra(Constants.WEBSITE);
-//        Objects.requireNonNull(getSupportActionBar()).setTitle(website);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if(website.equals(Constants.GOOGLE))
         {
             website="Kick Start";       // due to API result ,for Google
         }
+
         mRecyclerCodeforces = findViewById(R.id.ContestCardsRecycler);
         mRecyclerCodeforces.setLayoutManager(new LinearLayoutManager(this));
         contestByPlatform = new ArrayList<>();
@@ -222,15 +215,9 @@ public class ShowContestCardsActivity extends AppCompatActivity {
            co.setDuration(Methods.secondToFormatted(co.getDuration()));
         }
         mCardAdapter.setData(contestByPlatform);
-
-
-
-
     }
 
     private boolean filtertime(ContestObject contest,long i) {
-
-
 
         LocalDate currentDate=LocalDate.now();
         LocalDate contestDate=LocalDate.parse(contest.getStart().substring(0,10));
@@ -246,8 +233,6 @@ public class ShowContestCardsActivity extends AppCompatActivity {
 
     private void filterRatedContest(ContestObject contest) {
 
-        //TODO: implement Rated Contest Filtering (contestByPlatform.add(contest);)
-//        Toast.makeText(this, "Filtering Rated Contest", Toast.LENGTH_SHORT).show();
        String platform=contest.getPlatform().toLowerCase();
        //FOR CODECHEF
        if(platform.equals("codechef"))
