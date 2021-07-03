@@ -24,7 +24,6 @@ public class SignIn extends AppCompatActivity {
     private static final int RC_SIGN_IN = 355;
     GoogleSignInClient mGoogleSignInClient;
     SignInButton signIn;
-    //    TextView details;
     Button skip;
     Button signOut;
 
@@ -34,7 +33,6 @@ public class SignIn extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         signIn = findViewById(R.id.sign_in_button);
-//        details = findViewById(R.id.text_data);
         skip = findViewById(R.id.button_skip);
         signOut = findViewById(R.id.button_sign_out);
 
@@ -72,13 +70,20 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void signIn() {
+        /**Open SignIn Intent
+         * Opens Dilogue Box to choose among your Google account(s) */
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        // TODO: Deprecated menthod. To be fixed later.
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        /**After user selects an account form Intent
+         * or presses back button
+         * Handle SignIn */
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -91,35 +96,24 @@ public class SignIn extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
+            /**Sign In success
+             * Update UI if necessary
+             * and then switch Activity*/
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
-//            updateUI(account);
             Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
-//            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-//            if (acct != null) {
-//                String personName = acct.getDisplayName();
-//                String personGivenName = acct.getGivenName();
-//                String personFamilyName = acct.getFamilyName();
-//                String personEmail = acct.getEmail();
-//                String personId = acct.getId();
-//                Uri personPhoto = acct.getPhotoUrl();
-//
-//                details.setText(personName + "\n" + personGivenName + "\n" + personFamilyName + "\n" + personEmail + "\n" + personId + "\n" + personPhoto.toString());
-//            }
             startActivity(new Intent(SignIn.this, BaseActivity.class));
 
 
         } catch (ApiException e) {
+            /** SignIn Failure */
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-//            updateUI(null);
             Toast.makeText(this, "FAILURE", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void signOut() {
+        /** User pressed SignOut button*/
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
@@ -129,6 +123,7 @@ public class SignIn extends AppCompatActivity {
                 });
     }
 
+    // TODO: If the user is already SignedIn no need to show SignIn Activity. Skip this activity before the UI loads.
 //    @Override
 //    protected void onStart() {
 //        super.onStart();
