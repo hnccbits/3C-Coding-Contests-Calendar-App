@@ -1,6 +1,7 @@
 package com.noobsever.codingcontests;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -41,6 +43,8 @@ import com.noobsever.codingcontests.ViewModel.ApiViewModel;
 import com.noobsever.codingcontests.ViewModel.RoomViewModel;
 import com.noobsever.codingcontests.databinding.ActivityDrawerBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -57,8 +61,9 @@ public class DrawerActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
+    //TODO: Make all variables private
+    DrawerLayout drawer;
 
-    DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     ApiViewModel apiViewModel;
@@ -66,10 +71,12 @@ public class DrawerActivity extends AppCompatActivity {
     boolean doubleBackPressExitOnce = false;
     ImageView profilePicture;
     TextView emailId, name;
+    NavController navController;
 
     private CheckBox cforces, cchef, hrank, hearth, spoj, atcoder, leetcode, google;
     private SwitchMaterial switchTwelve, switchTwentyFour, switchNotification, switchRated, switchRunning, switch24Hours, switchUpcomingSevenDays, switchTwoWeeks, switchOneMonth;
     ArrayList<String> checkedItem;
+    ArrayList<String> prevCheckedListItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +87,16 @@ public class DrawerActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarDrawer.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
+        drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+        checkedItem = new ArrayList<>();
+
+        /* fetching previously saved checkboxes in data */
+        try {
+            prevCheckedListItem = (ArrayList<String>) Methods.fetchTabItems(this);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -89,44 +104,47 @@ public class DrawerActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        if(drawer!=null && drawer instanceof DrawerLayout ){
+            DrawerLayout mDrawer=(DrawerLayout)drawer;
+            mDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
+                @Override
+                public void onDrawerSlide(@NonNull @NotNull View drawerView, float slideOffset) {
 
+                }
+
+                @Override
+                public void onDrawerOpened(@NonNull @NotNull View drawerView) {
+                }
+
+                @Override
+                public void onDrawerClosed(@NonNull @NotNull View drawerView) {
+                    saveCheckBox();
+                    /* When drawer closed it will restart the activity when fragment status is Home fragment and
+                     * checkboxes are changed from previous checkboxes.
+                     */
+                    if(navController.getCurrentDestination().getId()==R.id.nav_home && !checkedItem.equals(prevCheckedListItem)) {
+                        finish();
+                        startActivity(new Intent(DrawerActivity.this, DrawerActivity.class));
+                        overridePendingTransition(0, 0);
+                    }
+                }
+
+                @Override
+                public void onDrawerStateChanged(int newState) {
+
+                }
+            });
+        }
         /** Access complete Nav Drawer */
         View header = navigationView.getHeaderView(0);
 
-        /** Access individual elements of Navigation Drawer */
-        cforces = header.findViewById(R.id.cb_codeforces);
-        cchef = header.findViewById(R.id.cb_codechef);
-        hrank = header.findViewById(R.id.cb_hackerrank);
-        hearth = header.findViewById(R.id.cb_hackerearth);
-        spoj = header.findViewById(R.id.cb_spoj);
-        atcoder = header.findViewById(R.id.cb_atcoder);
-        leetcode = header.findViewById(R.id.cb_leetcode);
-        google = header.findViewById(R.id.cb_google);
-        switchTwelve = header.findViewById(R.id.switch_12_time_format);
-        switchTwentyFour = header.findViewById(R.id.switch_24_time_format);
-        switchNotification = header.findViewById(R.id.switch_notification);
-        switchRated = header.findViewById(R.id.switch_ratedcontest);
-        switchRunning = header.findViewById(R.id.switch_runningcontest);
-        switch24Hours = header.findViewById(R.id.switch_24Hours);
-        switchUpcomingSevenDays = header.findViewById(R.id.switch_upcoming1week);
-        switchTwoWeeks = header.findViewById(R.id.switch_twoWeeks);
-        switchOneMonth = header.findViewById(R.id.switch_oneMonth);
-        profilePicture = header.findViewById(R.id.profile_picture);
-        emailId = header.findViewById(R.id.profile_email);
-        name = header.findViewById(R.id.profile_name);
-
-        // TODO: Checkbox in Navigation Drawer doesn't update. It has bugs. Fix it before production.
-        checkedItem = new ArrayList<>();
-
-        try {
-            checkedItem = (ArrayList<String>) Methods.fetchTabItems(this);
-
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        /* Initialising all the layout views
+         * used in nav header layout.
+         */
+        initHeaderView(header);
         handleSettingsInNavDrawer();
 
         mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
@@ -157,12 +175,38 @@ public class DrawerActivity extends AppCompatActivity {
         });
     }
 
+    private void initHeaderView(View header){
+        /* This method initialisng all attributes
+         * used in navigation drawer header 
+         */
+        cforces = header.findViewById(R.id.cb_codeforces);
+        cchef = header.findViewById(R.id.cb_codechef);
+        hrank = header.findViewById(R.id.cb_hackerrank);
+        hearth = header.findViewById(R.id.cb_hackerearth);
+        spoj = header.findViewById(R.id.cb_spoj);
+        atcoder = header.findViewById(R.id.cb_atcoder);
+        leetcode = header.findViewById(R.id.cb_leetcode);
+        google = header.findViewById(R.id.cb_google);
+        switchTwelve = header.findViewById(R.id.switch_12_time_format);
+        switchTwentyFour = header.findViewById(R.id.switch_24_time_format);
+        switchNotification = header.findViewById(R.id.switch_notification);
+        switchRated = header.findViewById(R.id.switch_ratedcontest);
+        switchRunning = header.findViewById(R.id.switch_runningcontest);
+        switch24Hours = header.findViewById(R.id.switch_24Hours);
+        switchUpcomingSevenDays = header.findViewById(R.id.switch_upcoming1week);
+        switchTwoWeeks = header.findViewById(R.id.switch_twoWeeks);
+        switchOneMonth = header.findViewById(R.id.switch_oneMonth);
+        profilePicture=header.findViewById(R.id.profile_picture);
+        emailId=header.findViewById(R.id.profile_email);
+        name=header.findViewById(R.id.profile_name);
+    }
     private void handleSettingsInNavDrawer() {
         /** Set Profile Picture, User Name and Email Address in Navigation Drawer */
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             String personEmail = account.getEmail();
             emailId.setText(personEmail);
+
             name.setText(account.getGivenName() + " " + account.getFamilyName());
             Glide.with(this).load(account.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(profilePicture);// show Image using glide
         }
@@ -381,38 +425,89 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     // TODO: If Navigation Drawer is Open and the user presses back button then the list should update
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        checkedItem.clear();
-//
-//        if (cforces.isChecked()) checkedItem.add(Constants.CODEFORCES);
-//        if (cchef.isChecked()) checkedItem.add(Constants.CODECHEF);
-//        if (hrank.isChecked()) checkedItem.add(Constants.HACKERRANK);
-//        if (hearth.isChecked()) checkedItem.add(Constants.HACKEREARTH);
-//        if (spoj.isChecked()) checkedItem.add(Constants.SPOJ);
-//        if (atcoder.isChecked()) checkedItem.add(Constants.ATCODER);
-//        if (leetcode.isChecked()) checkedItem.add(Constants.LEETCODE);
-//        if (google.isChecked()) checkedItem.add(Constants.GOOGLE);
-//
-//        if (checkedItem.isEmpty()) {
-//            cforces.setChecked(true);
-//            checkedItem.add(Constants.CODEFORCES);
-//            Methods.showToast(this, "Atleast 1 platform has to be selected");
-//        }
-//
-//        Methods.saveTabItems(this, checkedItem);
-//
-////        if(Methods.getIntPreferences(DrawerActivity.this, Constants.LAYOUT_SWITCH_KEY,Constants.CURRENT_ACTIVITY)==1)
-////            startActivity(new Intent(DrawerActivity.this,LayoutOneActivity.class));
-////        else
-////            startActivity(new Intent(DrawerActivity.this,LayoutTwoActivity.class));
-////        startActivity(new Intent(DrawerActivity.this, DrawerActivity.class));
+    @Override
+    public void onBackPressed() {
+        /* If drawer is opened when back pressed drawer will be closed */
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }else if(navController.getCurrentDestination().getId()==R.id.nav_home){
+            /* If currently in home fragment on back pressed application will closed */
+            finishAffinity();
+        }
+        else {
+            /* If currently in other fragment instead of home fragment on back pressed
+             * user will navigate to home fragment.
+             */
+            navController.navigate(R.id.nav_home);
+        }
 //        finishAffinity();
-//    }
+    }
+    private void saveCheckBox(){
+        /* When drawer will closed this method save all checkboxes state and store
+         * this in database when checkboxes checked methods store 1 and when checkboxes
+         * not checked methods store 0.
+         * It means 1 stands for true and 0 stands for false.
+         */
+        checkedItem.clear();
+        if (cforces.isChecked()) {
+            checkedItem.add(Constants.CODEFORCES);
+            Methods.setPreferences(DrawerActivity.this,Constants.CODEFORCES,Constants.CODEFORCES,1);
+        }
+        else  Methods.setPreferences(DrawerActivity.this,Constants.CODEFORCES,Constants.CODEFORCES,0);
+
+        if (cchef.isChecked()){
+            checkedItem.add(Constants.CODECHEF);
+            Methods.setPreferences(DrawerActivity.this,Constants.CODECHEF,Constants.CODECHEF,1);
+        }
+        else Methods.setPreferences(DrawerActivity.this,Constants.CODECHEF,Constants.CODECHEF,0);
+
+        if (hrank.isChecked()) {
+            checkedItem.add(Constants.HACKERRANK);
+            Methods.setPreferences(DrawerActivity.this,Constants.HACKERRANK,Constants.HACKERRANK,1);
+        }
+        else  Methods.setPreferences(DrawerActivity.this,Constants.HACKERRANK,Constants.HACKERRANK,0);
+
+        if (hearth.isChecked())
+        {
+            checkedItem.add(Constants.HACKEREARTH);
+            Methods.setPreferences(DrawerActivity.this,Constants.HACKEREARTH,Constants.HACKEREARTH,1);
+        }
+        else Methods.setPreferences(DrawerActivity.this,Constants.HACKEREARTH,Constants.HACKEREARTH,0);
+
+        if (spoj.isChecked()) {
+            checkedItem.add(Constants.SPOJ);
+            Methods.setPreferences(DrawerActivity.this,Constants.SPOJ,Constants.SPOJ,1);
+        }
+        else Methods.setPreferences(DrawerActivity.this,Constants.SPOJ,Constants.SPOJ,0);
+
+        if (atcoder.isChecked()) {
+            checkedItem.add(Constants.ATCODER);
+            Methods.setPreferences(DrawerActivity.this,Constants.ATCODER,Constants.ATCODER,1);
+        }
+        else Methods.setPreferences(DrawerActivity.this,Constants.ATCODER,Constants.ATCODER,0);
+
+        if (leetcode.isChecked())  {
+            checkedItem.add(Constants.LEETCODE);
+            Methods.setPreferences(DrawerActivity.this,Constants.LEETCODE,Constants.LEETCODE,1);
+        }
+        else  Methods.setPreferences(DrawerActivity.this,Constants.LEETCODE,Constants.LEETCODE,0);
+
+        if (google.isChecked()){
+            checkedItem.add(Constants.GOOGLE);
+            Methods.setPreferences(DrawerActivity.this,Constants.GOOGLE,Constants.GOOGLE,1);
+        }
+        else Methods.setPreferences(DrawerActivity.this,Constants.GOOGLE,Constants.GOOGLE,0);
+
+        if (checkedItem.isEmpty()) {
+            cforces.setChecked(true);
+            checkedItem.add(Constants.CODEFORCES);
+            Methods.showToast(this, "Atleast 1 platform has to be selected");
+            Methods.setPreferences(DrawerActivity.this,Constants.CODEFORCES,Constants.CODEFORCES,1);
+        }
+    }
 
     public void restoreCheckBoxState() {
-        HashSet<String> set = new HashSet<>(checkedItem);
+        HashSet<String> set = new HashSet<>(prevCheckedListItem);
         cforces.setChecked(set.contains(Constants.CODEFORCES));
         cchef.setChecked(set.contains(Constants.CODECHEF));
         hrank.setChecked(set.contains(Constants.HACKERRANK));
@@ -452,14 +547,6 @@ public class DrawerActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                onBackPressed();
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
         return super.onOptionsItemSelected(item);
     }
 }

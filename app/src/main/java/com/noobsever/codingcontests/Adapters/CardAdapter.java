@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
+import com.noobsever.codingcontests.Utils.Methods;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -113,8 +114,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
         holder.mCard.setAnimation(AnimationUtils.loadAnimation(context, R.anim.pop_in));
 
         holder.mRoundName.setText(ContestObjectArrayList.get(position).getTitle());
-        holder.mDateEnd.setText(ContestObjectArrayList.get(position).getEnd());
-        holder.mDateStart.setText(ContestObjectArrayList.get(position).getStart());
+        holder.mDateEnd.setText(Methods.getStringFormat(ContestObjectArrayList.get(position).getEnd()));
+        holder.mDateStart.setText(Methods.getStringFormat(ContestObjectArrayList.get(position).getStart()));
         holder.mDuration.setText(ContestObjectArrayList.get(position).getDuration());
 //        Log.e(TAG, "START>>>>: "+ ContestObjectArrayList.get(position).getStart());
 //        Log.e(TAG, "DATE>>>>: "+ ContestObjectArrayList.get(position).getStart().substring(0,10));
@@ -230,6 +231,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
