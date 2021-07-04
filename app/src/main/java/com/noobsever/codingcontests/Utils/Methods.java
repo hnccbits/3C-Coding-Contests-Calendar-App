@@ -282,4 +282,48 @@ public class Methods {
 
     }
 
+    /* Below two methods converts the unformatted
+     * time string to formatted time string.
+     */
+    public static String getStringFormat(String startTime){
+        String formatString=null;
+        String time=startTime.substring(11,16);
+        String year=startTime.substring(0,4);
+        String month=startTime.substring(5,7);
+        String date=startTime.substring(8,10);
+        month=numToEng(Integer.parseInt(month));
+        formatString=time+" "+date+"-"+month+"-"+year;
+        return formatString;
+    }
+    private static String numToEng(int month){
+        String engMonth=null;
+        switch (month){
+            case 1: engMonth="Jan";
+                break;
+            case  2: engMonth="Feb";
+                break;
+            case  3: engMonth="Mar";
+                break;
+            case  4: engMonth="Apr";
+                break;
+            case  5: engMonth="May";
+                break;
+            case  6: engMonth="Jun";
+                break;
+            case  7: engMonth="Jul";
+                break;
+            case  8: engMonth="Aug";
+                break;
+            case  9: engMonth="Sep";
+                break;
+            case  10: engMonth="Oct";
+                break;
+            case  11: engMonth="Nov";
+                break;
+            case  12: engMonth="Dec";
+                break;
+        }
+        return  engMonth;
+    }
+
 }

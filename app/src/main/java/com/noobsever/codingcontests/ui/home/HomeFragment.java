@@ -53,7 +53,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
     ArrayList<String> mTabItemList;
@@ -82,21 +81,8 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-//        final TextView textView = binding.textHome;
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-
-
         return root;
     }
 
@@ -146,6 +132,9 @@ public class HomeFragment extends Fragment {
 //            // Bug fixed below : When App launches for first time Setting checkboxes remaining unmarked.
 //            Methods.saveTabItems(context,mTabItemList);
 //        }
+        /* Each time fragment start it will add those items in list
+           which is checked in checkboxes.
+         */
         boolean cforces, cchef, hrank, hearth, atcoder, leetcode, google, spoj;
         cforces = Methods.getIntPreferences(context, Constants.CODEFORCES, Constants.CODEFORCES) != 0;
         cchef = Methods.getIntPreferences(context, Constants.CODECHEF, Constants.CODECHEF) != 0;
@@ -166,6 +155,11 @@ public class HomeFragment extends Fragment {
         if (leetcode) mTabItemList.add(Constants.LEETCODE);
         if (google) mTabItemList.add(Constants.GOOGLE);
         if (mTabItemList.isEmpty()) {
+            /* mTabItemList will be empty when user just install the
+             * app because there is no previous sharedpreference data
+             * so we display all websites contest available in
+             * our Api.
+             */
             mTabItemList.add(Constants.CODEFORCES);
             mTabItemList.add(Constants.CODECHEF);
             mTabItemList.add(Constants.HACKERRANK);

@@ -20,9 +20,10 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/applogo2"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/splashScreenStyle"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DrawerActivity">
+        <activity android:name=".DrawerActivity"
+            android:theme="@style/AppTheme">
 
             <!--             <intent-filter>-->
             <!--             <action android:name="android.intent.action.MAIN" />-->
@@ -30,7 +31,8 @@
             <!--             </intent-filter>-->
 
         </activity>
-        <activity android:name=".SignIn" />
+        <activity android:name=".SignIn"
+            android:theme="@style/AppTheme"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -58,18 +60,23 @@
         <!-- </service> -->
         <activity
             android:name=".Screens.ShowContestCardsActivity"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".Screens.LayoutOneActivity" />
         <activity android:name=".Screens.RoomActivity" />
         <activity
             android:name=".Screens.SuggestUsActivity"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".Screens.BaseActivity" />
         <activity
             android:name=".Screens.HelpActivity"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".Screens.BaseActivity" />
         <activity
             android:name=".Screens.NotificationActivity"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".Screens.BaseActivity" />
-        <activity android:name=".Screens.BaseActivity">
+        <activity android:name=".Screens.BaseActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.INSERT" />
 
@@ -84,6 +91,7 @@
         </activity>
         <activity
             android:name=".Screens.SettingsActivity"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".Screens.BaseActivity" />
         <activity android:name=".Screens.SplashScreenActivity">
 
