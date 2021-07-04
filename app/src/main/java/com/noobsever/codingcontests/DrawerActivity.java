@@ -50,7 +50,7 @@ import java.util.HashSet;
 import java.util.List;
 
 
-public class DrawerActivity extends AppCompatActivity {
+public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
     // TODO: Remove all libraries that are not in use
     // TODO: Feedback should show user a Edit Text. Collect Feedback and save it in a Google spreadsheet. Search Google how to access spreadsheet from Android.
@@ -150,6 +150,8 @@ public class DrawerActivity extends AppCompatActivity {
         mRoomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
         apiViewModel = new ViewModelProvider(this).get(ApiViewModel.class);
         apiViewModel.init();
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         /**Since Internet is necessary for App to function
          * Check if Internet is Available
@@ -548,5 +550,28 @@ public class DrawerActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+
     }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.nav_share){
+            try{
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "welcome to hncc");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
+                startActivity(Intent.createChooser(shareIntent, "Share with"));
+            } catch (Exception e){
+
+            }
+
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 }
