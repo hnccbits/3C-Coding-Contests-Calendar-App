@@ -20,16 +20,17 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/applogo2"
         android:supportsRtl="true"
-        android:theme="@style/splashScreenStyle"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".DrawerActivity"
             android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT" />
 
-            <!--             <intent-filter>-->
-            <!--             <action android:name="android.intent.action.MAIN" />-->
-            <!--             <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--             </intent-filter>-->
+                <data android:mimeType="vnd.android.cursor.dir/event" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".SignIn"
             android:theme="@style/AppTheme"/>
@@ -61,51 +62,27 @@
         <activity
             android:name=".Screens.ShowContestCardsActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".Screens.LayoutOneActivity" />
+            android:parentActivityName=".DrawerActivity" />
         <activity android:name=".Screens.RoomActivity" />
         <activity
             android:name=".Screens.SuggestUsActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".Screens.BaseActivity" />
+            android:parentActivityName=".DrawerActivity" />
         <activity
             android:name=".Screens.HelpActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".Screens.BaseActivity" />
+            android:parentActivityName=".DrawerActivity" />
         <activity
             android:name=".Screens.NotificationActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".Screens.BaseActivity" />
-        <activity android:name=".Screens.BaseActivity"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.INSERT" />
-
-                <data android:mimeType="vnd.android.cursor.dir/event" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <!--                <action android:name="android.intent.action.MAIN" />-->
-                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Screens.SettingsActivity"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Screens.BaseActivity" />
-        <activity android:name=".Screens.SplashScreenActivity">
-
+            android:parentActivityName=".DrawerActivity" />
+        <activity android:name=".Screens.SplashScreenActivity"
+            android:theme="@style/splashScreenStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Screens.LayoutTwoActivity"
-            android:parentActivityName=".Screens.BaseActivity" />
-        <activity
-            android:name=".Screens.LayoutOneActivity"
-            android:parentActivityName=".Screens.BaseActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

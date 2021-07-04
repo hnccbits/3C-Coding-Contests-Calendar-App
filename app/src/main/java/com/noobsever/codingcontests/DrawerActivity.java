@@ -50,7 +50,7 @@ import java.util.HashSet;
 import java.util.List;
 
 
-public class DrawerActivity extends AppCompatActivity {
+public class DrawerActivity extends AppCompatActivity  {
     // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
     // TODO: Remove all libraries that are not in use
     // TODO: Feedback should show user a Edit Text. Collect Feedback and save it in a Google spreadsheet. Search Google how to access spreadsheet from Android.
@@ -101,12 +101,23 @@ public class DrawerActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,R.id.nav_open,R.id.nav_open_source)
                 .setDrawerLayout(drawer)
                 .build();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                if(item.getItemId()==R.id.nav_open_source){
+                    Toast.makeText(DrawerActivity.this, "Nipun", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+
+            }
+        });
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        
         if(drawer!=null && drawer instanceof DrawerLayout ){
             DrawerLayout mDrawer=(DrawerLayout)drawer;
             mDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
@@ -174,7 +185,6 @@ public class DrawerActivity extends AppCompatActivity {
             }
         });
     }
-
     private void initHeaderView(View header){
         /* This method initialisng all attributes
          * used in navigation drawer header 
