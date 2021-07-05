@@ -9,8 +9,6 @@ import android.os.IBinder ;
 
 import androidx.core.app.NotificationCompat;
 
-import com.noobsever.codingcontests.Screens.BaseActivity;
-
 //import android.support.v4.app.NotificationCompat ;
 public class NotifyService extends Service {
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
@@ -19,7 +17,7 @@ public class NotifyService extends Service {
     }
     @Override
     public IBinder onBind (Intent intent) {
-        Intent notificationIntent = new Intent(getApplicationContext() ,  BaseActivity. class ) ;
+        Intent notificationIntent = new Intent(getApplicationContext() ,  DrawerActivity. class ) ;
         notificationIntent.putExtra( "fromNotification" , true ) ;
         notificationIntent.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP ) ;
         PendingIntent pendingIntent = PendingIntent. getActivity ( this, 0 , notificationIntent , 0 ) ;

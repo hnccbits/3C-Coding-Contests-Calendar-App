@@ -2,6 +2,7 @@ package com.noobsever.codingcontests;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,7 +18,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.noobsever.codingcontests.Screens.BaseActivity;
 
 public class SignIn extends AppCompatActivity {
 
@@ -89,6 +89,7 @@ public class SignIn extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
+            Log.e("Nipun","1st ");
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -99,6 +100,7 @@ public class SignIn extends AppCompatActivity {
             /**Sign In success
              * Update UI if necessary
              * and then switch Activity*/
+            Log.e("Nipun","2nd");
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SignIn.this, DrawerActivity.class));
@@ -108,6 +110,7 @@ public class SignIn extends AppCompatActivity {
             /** SignIn Failure */
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.e("Nipun",e.toString());
             Toast.makeText(this, "FAILURE", Toast.LENGTH_SHORT).show();
         }
     }
