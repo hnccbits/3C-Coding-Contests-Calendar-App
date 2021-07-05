@@ -555,19 +555,25 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item){
-        int id = item.getItemId();
 
-        if(id == R.id.nav_share){
-            try{
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "welcome to hncc");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
-                startActivity(Intent.createChooser(shareIntent, "Share with"));
-            } catch (Exception e){
+        switch(item.getItemId()){
+            case R.id.nav_gallery:navController.navigate(R.id.nav_gallery);
+               break;
+            case R.id.nav_slideshow:navController.navigate(R.id.nav_slideshow);
+               break;
+            case R.id.nav_home:navController.navigate(R.id.nav_home);
+               break;
+            case R.id.nav_share:
+                try{
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "welcome to hncc");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
+                    startActivity(Intent.createChooser(shareIntent, "Share with"));
+                } catch (Exception e){
 
-            }
-
+                }
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
