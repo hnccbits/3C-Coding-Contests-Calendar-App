@@ -170,13 +170,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(context, "Implement Share " + position, Toast.LENGTH_SHORT).show();
+//              // implemented share of contest
+                // getStart() provides ie. 2014-07-07T18:30:00.000Z
+                String startDate = ContestObjectArrayList.get(position).getStart().substring(0, 16);
+                String endDate = ContestObjectArrayList.get(position).getStart().substring(0, 16);
 
-                LocalDateTime start = LocalDateTime.parse(ContestObjectArrayList.get(position).getStart().substring(0, ContestObjectArrayList.get(position).getStart().length() - 2));
-                LocalDateTime stop = LocalDateTime.parse(ContestObjectArrayList.get(position).getEnd().substring(0, ContestObjectArrayList.get(position).getEnd().length() - 2));
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                String formatStart = start.format(format);
-                String formatEnd = stop.format(format);
+                String formatStart = startDate.substring(8, 10)+"-"+startDate.substring(5,7)+"-"+startDate.substring(0,4)+" ("+startDate.substring(11,16)+")";
+                String formatEnd = endDate.substring(8, 10)+"-"+endDate.substring(5,7)+"-"+endDate.substring(0,4)+" ("+endDate.substring(11,16)+")";
 
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -210,10 +210,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
             @Override
             public void onClick(View view) {
 //                Toast.makeText(context,ContestObjectArrayList.get(position).toString(),Toast.LENGTH_SHORT).show();
-//                Log.d(TAG, "onClick: Duration " + ContestObjectArrayList.get(position).getDuration());
-//                Log.d(TAG, "onClick: Start " + ContestObjectArrayList.get(position).getStart());
-//                Log.d(TAG, "onClick: End " + ContestObjectArrayList.get(position).getEnd());
-//                Log.d(TAG, "onClick: Status " + ContestObjectArrayList.get(position).getStatus());
 
                 LocalDateTime start = LocalDateTime.parse(ContestObjectArrayList.get(position).getStart().substring(0, ContestObjectArrayList.get(position).getStart().length() - 2));
                 LocalDateTime stop = LocalDateTime.parse(ContestObjectArrayList.get(position).getEnd().substring(0, ContestObjectArrayList.get(position).getEnd().length() - 2));
