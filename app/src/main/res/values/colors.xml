@@ -7,4 +7,7 @@
     <color name="white">#FFF</color>
     <color name="blue_grey_900">#263238</color>
     <color name="black">#FF000000</color>
+
+    <color name="yellowish_bg">#FFFFC03D</color>
+    <color name="text_color">#FF573F4C</color>
 </resources>

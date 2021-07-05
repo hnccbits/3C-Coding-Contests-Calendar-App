@@ -65,10 +65,6 @@
             android:parentActivityName=".DrawerActivity" />
         <activity android:name=".Screens.RoomActivity" />
         <activity
-            android:name=".Screens.SuggestUsActivity"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".DrawerActivity" />
-        <activity
             android:name=".Screens.HelpActivity"
             android:theme="@style/AppTheme"
             android:parentActivityName=".DrawerActivity" />

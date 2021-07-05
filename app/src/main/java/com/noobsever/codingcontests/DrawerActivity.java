@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
@@ -50,7 +50,7 @@ import java.util.HashSet;
 import java.util.List;
 
 
-public class DrawerActivity extends AppCompatActivity  {
+public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
     // TODO: Remove all libraries that are not in use
     // TODO: Feedback should show user a Edit Text. Collect Feedback and save it in a Google spreadsheet. Search Google how to access spreadsheet from Android.
@@ -62,21 +62,19 @@ public class DrawerActivity extends AppCompatActivity  {
     private ActivityDrawerBinding binding;
 
     //TODO: Make all variables private
-    DrawerLayout drawer;
+    private DrawerLayout drawer;
 
-    ActionBarDrawerToggle actionBarDrawerToggle;
-    Toolbar toolbar;
-    ApiViewModel apiViewModel;
-    RoomViewModel mRoomViewModel;
+    private ApiViewModel apiViewModel;
+    private RoomViewModel mRoomViewModel;
     boolean doubleBackPressExitOnce = false;
-    ImageView profilePicture;
-    TextView emailId, name;
-    NavController navController;
+    private ImageView profilePicture;
+    private TextView emailId, name;
+    private NavController navController;
 
     private CheckBox cforces, cchef, hrank, hearth, spoj, atcoder, leetcode, google;
     private SwitchMaterial switchTwelve, switchTwentyFour, switchNotification, switchRated, switchRunning, switch24Hours, switchUpcomingSevenDays, switchTwoWeeks, switchOneMonth;
-    ArrayList<String> checkedItem;
-    ArrayList<String> prevCheckedListItem;
+    private ArrayList<String> checkedItem;
+    private ArrayList<String> prevCheckedListItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +99,13 @@ public class DrawerActivity extends AppCompatActivity  {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,R.id.nav_open,R.id.nav_open_source)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,R.id.nav_suggest)
                 .setDrawerLayout(drawer)
                 .build();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                if(item.getItemId()==R.id.nav_open_source){
+                if (item.getItemId() == R.id.nav_open_source) {
                     Toast.makeText(DrawerActivity.this, "Nipun", Toast.LENGTH_SHORT).show();
                 }
                 return false;
@@ -117,9 +115,9 @@ public class DrawerActivity extends AppCompatActivity  {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        
-        if(drawer!=null && drawer instanceof DrawerLayout ){
-            DrawerLayout mDrawer=(DrawerLayout)drawer;
+
+        if (drawer != null && drawer instanceof DrawerLayout) {
+            DrawerLayout mDrawer = (DrawerLayout) drawer;
             mDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
                 @Override
                 public void onDrawerSlide(@NonNull @NotNull View drawerView, float slideOffset) {
@@ -136,7 +134,7 @@ public class DrawerActivity extends AppCompatActivity  {
                     /* When drawer closed it will restart the activity when fragment status is Home fragment and
                      * checkboxes are changed from previous checkboxes.
                      */
-                    if(navController.getCurrentDestination().getId()==R.id.nav_home && !checkedItem.equals(prevCheckedListItem)) {
+                    if (navController.getCurrentDestination().getId() == R.id.nav_home && !checkedItem.equals(prevCheckedListItem)) {
                         finish();
                         startActivity(new Intent(DrawerActivity.this, DrawerActivity.class));
                         overridePendingTransition(0, 0);
@@ -162,6 +160,8 @@ public class DrawerActivity extends AppCompatActivity  {
         apiViewModel = new ViewModelProvider(this).get(ApiViewModel.class);
         apiViewModel.init();
 
+        navigationView.setNavigationItemSelectedListener(this);
+
         /**Since Internet is necessary for App to function
          * Check if Internet is Available
          * */
@@ -185,9 +185,10 @@ public class DrawerActivity extends AppCompatActivity  {
             }
         });
     }
-    private void initHeaderView(View header){
+
+    private void initHeaderView(View header) {
         /* This method initialisng all attributes
-         * used in navigation drawer header 
+         * used in navigation drawer header
          */
         cforces = header.findViewById(R.id.cb_codeforces);
         cchef = header.findViewById(R.id.cb_codechef);
@@ -206,10 +207,11 @@ public class DrawerActivity extends AppCompatActivity  {
         switchUpcomingSevenDays = header.findViewById(R.id.switch_upcoming1week);
         switchTwoWeeks = header.findViewById(R.id.switch_twoWeeks);
         switchOneMonth = header.findViewById(R.id.switch_oneMonth);
-        profilePicture=header.findViewById(R.id.profile_picture);
-        emailId=header.findViewById(R.id.profile_email);
-        name=header.findViewById(R.id.profile_name);
+        profilePicture = header.findViewById(R.id.profile_picture);
+        emailId = header.findViewById(R.id.profile_email);
+        name = header.findViewById(R.id.profile_name);
     }
+
     private void handleSettingsInNavDrawer() {
         /** Set Profile Picture, User Name and Email Address in Navigation Drawer */
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -440,11 +442,21 @@ public class DrawerActivity extends AppCompatActivity  {
         /* If drawer is opened when back pressed drawer will be closed */
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else if(navController.getCurrentDestination().getId()==R.id.nav_home){
+        } else if (navController.getCurrentDestination().getId() == R.id.nav_home) {
             /* If currently in home fragment on back pressed application will closed */
-            finishAffinity();
-        }
-        else {
+            if(doubleBackPressExitOnce)finishAffinity();
+            else {
+                doubleBackPressExitOnce = true;
+                Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        doubleBackPressExitOnce = false;
+                    }
+                }, 2000);
+            }
+        } else {
             /* If currently in other fragment instead of home fragment on back pressed
              * user will navigate to home fragment.
              */
@@ -452,7 +464,8 @@ public class DrawerActivity extends AppCompatActivity  {
         }
 //        finishAffinity();
     }
-    private void saveCheckBox(){
+
+    private void saveCheckBox() {
         /* When drawer will closed this method save all checkboxes state and store
          * this in database when checkboxes checked methods store 1 and when checkboxes
          * not checked methods store 0.
@@ -461,58 +474,54 @@ public class DrawerActivity extends AppCompatActivity  {
         checkedItem.clear();
         if (cforces.isChecked()) {
             checkedItem.add(Constants.CODEFORCES);
-            Methods.setPreferences(DrawerActivity.this,Constants.CODEFORCES,Constants.CODEFORCES,1);
-        }
-        else  Methods.setPreferences(DrawerActivity.this,Constants.CODEFORCES,Constants.CODEFORCES,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.CODEFORCES, Constants.CODEFORCES, 1);
+        } else
+            Methods.setPreferences(DrawerActivity.this, Constants.CODEFORCES, Constants.CODEFORCES, 0);
 
-        if (cchef.isChecked()){
+        if (cchef.isChecked()) {
             checkedItem.add(Constants.CODECHEF);
-            Methods.setPreferences(DrawerActivity.this,Constants.CODECHEF,Constants.CODECHEF,1);
-        }
-        else Methods.setPreferences(DrawerActivity.this,Constants.CODECHEF,Constants.CODECHEF,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.CODECHEF, Constants.CODECHEF, 1);
+        } else
+            Methods.setPreferences(DrawerActivity.this, Constants.CODECHEF, Constants.CODECHEF, 0);
 
         if (hrank.isChecked()) {
             checkedItem.add(Constants.HACKERRANK);
-            Methods.setPreferences(DrawerActivity.this,Constants.HACKERRANK,Constants.HACKERRANK,1);
-        }
-        else  Methods.setPreferences(DrawerActivity.this,Constants.HACKERRANK,Constants.HACKERRANK,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.HACKERRANK, Constants.HACKERRANK, 1);
+        } else
+            Methods.setPreferences(DrawerActivity.this, Constants.HACKERRANK, Constants.HACKERRANK, 0);
 
-        if (hearth.isChecked())
-        {
+        if (hearth.isChecked()) {
             checkedItem.add(Constants.HACKEREARTH);
-            Methods.setPreferences(DrawerActivity.this,Constants.HACKEREARTH,Constants.HACKEREARTH,1);
-        }
-        else Methods.setPreferences(DrawerActivity.this,Constants.HACKEREARTH,Constants.HACKEREARTH,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.HACKEREARTH, Constants.HACKEREARTH, 1);
+        } else
+            Methods.setPreferences(DrawerActivity.this, Constants.HACKEREARTH, Constants.HACKEREARTH, 0);
 
         if (spoj.isChecked()) {
             checkedItem.add(Constants.SPOJ);
-            Methods.setPreferences(DrawerActivity.this,Constants.SPOJ,Constants.SPOJ,1);
-        }
-        else Methods.setPreferences(DrawerActivity.this,Constants.SPOJ,Constants.SPOJ,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.SPOJ, Constants.SPOJ, 1);
+        } else Methods.setPreferences(DrawerActivity.this, Constants.SPOJ, Constants.SPOJ, 0);
 
         if (atcoder.isChecked()) {
             checkedItem.add(Constants.ATCODER);
-            Methods.setPreferences(DrawerActivity.this,Constants.ATCODER,Constants.ATCODER,1);
-        }
-        else Methods.setPreferences(DrawerActivity.this,Constants.ATCODER,Constants.ATCODER,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.ATCODER, Constants.ATCODER, 1);
+        } else Methods.setPreferences(DrawerActivity.this, Constants.ATCODER, Constants.ATCODER, 0);
 
-        if (leetcode.isChecked())  {
+        if (leetcode.isChecked()) {
             checkedItem.add(Constants.LEETCODE);
-            Methods.setPreferences(DrawerActivity.this,Constants.LEETCODE,Constants.LEETCODE,1);
-        }
-        else  Methods.setPreferences(DrawerActivity.this,Constants.LEETCODE,Constants.LEETCODE,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.LEETCODE, Constants.LEETCODE, 1);
+        } else
+            Methods.setPreferences(DrawerActivity.this, Constants.LEETCODE, Constants.LEETCODE, 0);
 
-        if (google.isChecked()){
+        if (google.isChecked()) {
             checkedItem.add(Constants.GOOGLE);
-            Methods.setPreferences(DrawerActivity.this,Constants.GOOGLE,Constants.GOOGLE,1);
-        }
-        else Methods.setPreferences(DrawerActivity.this,Constants.GOOGLE,Constants.GOOGLE,0);
+            Methods.setPreferences(DrawerActivity.this, Constants.GOOGLE, Constants.GOOGLE, 1);
+        } else Methods.setPreferences(DrawerActivity.this, Constants.GOOGLE, Constants.GOOGLE, 0);
 
         if (checkedItem.isEmpty()) {
             cforces.setChecked(true);
             checkedItem.add(Constants.CODEFORCES);
             Methods.showToast(this, "Atleast 1 platform has to be selected");
-            Methods.setPreferences(DrawerActivity.this,Constants.CODEFORCES,Constants.CODEFORCES,1);
+            Methods.setPreferences(DrawerActivity.this, Constants.CODEFORCES, Constants.CODEFORCES, 1);
         }
     }
 
@@ -558,5 +567,49 @@ public class DrawerActivity extends AppCompatActivity  {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+
     }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.nav_gallery:
+                navController.navigate(R.id.nav_gallery);
+                break;
+            case R.id.nav_slideshow:
+                navController.navigate(R.id.nav_slideshow);
+                break;
+            case R.id.nav_home:
+                navController.navigate(R.id.nav_home);
+                break;
+            case R.id.nav_share:
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "welcome to hncc");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName());
+                    startActivity(Intent.createChooser(shareIntent, "Share with"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.nav_suggest:
+                navController.navigate(R.id.nav_suggest);
+                break;
+            case R.id.nav_open_source:
+                try {
+                    String url = "https://github.com/hnccbits/3C-Coding-Contests-Calendar-App";
+                    Intent openSourceIntent = new Intent(Intent.ACTION_VIEW);
+                    openSourceIntent.setData(Uri.parse(url));
+                    startActivity(openSourceIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return false;
+    }
+
 }
