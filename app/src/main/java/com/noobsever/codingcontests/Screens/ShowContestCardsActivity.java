@@ -32,6 +32,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -218,12 +220,27 @@ public class ShowContestCardsActivity extends AppCompatActivity {
     }
 
     private boolean filtertime(ContestObject contest,long i) {
+        String strDate = contest.getStart().substring(0,10);
 
-        LocalDate currentDate=LocalDate.now();
-        LocalDate contestDate=LocalDate.parse(contest.getStart().substring(0,10));
+        long noOfDaysBetween;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate currentDate= null;
+            currentDate = LocalDate.now();
+            LocalDate contestDate=LocalDate.parse(strDate);
 
-        //calculating number of days remaining  for Contest
-        long noOfDaysBetween = ChronoUnit.DAYS.between(currentDate, contestDate);
+            //calculating number of days remaining  for Contest
+            noOfDaysBetween = ChronoUnit.DAYS.between(currentDate, contestDate);
+        } else {
+            Calendar cal = Calendar.getInstance();
+            Date currentDate  =  Calendar.getInstance().getTime();
+            cal.set(Calendar.YEAR, Integer.parseInt(strDate.substring(0,4)));
+            cal.set(Calendar.MONTH, Integer.parseInt(strDate.substring(5,7)) -1);
+            cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(strDate.substring(8,10)));
+            Date contestDate = cal.getTime();
+            // dividing by / 24*60*60*1000
+            noOfDaysBetween = (contestDate.getTime() - currentDate.getTime())/86400000;
+        }
+
         if(noOfDaysBetween>0 && noOfDaysBetween<=i)
             return true;
         else
