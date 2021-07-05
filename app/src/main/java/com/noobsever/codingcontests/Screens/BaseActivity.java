@@ -26,7 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.noobsever.codingcontests.BuildConfig;
+//import com.noobsever.codingcontests.BuildConfig;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
 import com.noobsever.codingcontests.Utils.Constants;
@@ -127,7 +127,8 @@ public class BaseActivity extends AppCompatActivity {
                                         Intent sendIntent = new Intent();
                                         sendIntent.setAction(Intent.ACTION_SEND);
                                         sendIntent.putExtra(Intent.EXTRA_TEXT,
-                                                "Hey get ready to check coding contests of different platforms" + BuildConfig.APPLICATION_ID);
+                                                "Hey get ready to check coding contests of different platforms");
+//                                                        + BuildConfig.APPLICATION_ID);
                                         sendIntent.setType("text/plain");
                                         startActivity(sendIntent);
                                     }
