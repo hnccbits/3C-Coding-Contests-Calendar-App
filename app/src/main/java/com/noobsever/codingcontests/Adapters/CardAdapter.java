@@ -173,7 +173,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
 //              // implemented share of contest
                 // getStart() provides ie. 2014-07-07T18:30:00.000Z
                 String startDate = ContestObjectArrayList.get(position).getStart().substring(0, 16);
-                String endDate = ContestObjectArrayList.get(position).getStart().substring(0, 16);
+                String endDate = ContestObjectArrayList.get(position).getEnd().substring(0, 16);
 
                 String formatStart = startDate.substring(8, 10)+"-"+startDate.substring(5,7)+"-"+startDate.substring(0,4)+" ("+startDate.substring(11,16)+")";
                 String formatEnd = endDate.substring(8, 10)+"-"+endDate.substring(5,7)+"-"+endDate.substring(0,4)+" ("+endDate.substring(11,16)+")";
@@ -182,8 +182,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
                 sendIntent.setAction(Intent.ACTION_SEND);
                 String message = "Checkout this contest on " +
                         ContestObjectArrayList.get(position).getPlatform() + " \n" +
-                        ContestObjectArrayList.get(position).getTitle()
-                        + "\nDuration " + ContestObjectArrayList.get(position).getDuration() +
+                        ContestObjectArrayList.get(position).getTitle() +
+                        "\nDuration " + Double.parseDouble(ContestObjectArrayList.get(position).getDuration())/3600 +" hrs" +
                         "\nStatus " + ContestObjectArrayList.get(position).getStatus() +
                         "\nStart Time " + formatStart +
                         "\nEnd Time " + formatEnd + "\n" +
