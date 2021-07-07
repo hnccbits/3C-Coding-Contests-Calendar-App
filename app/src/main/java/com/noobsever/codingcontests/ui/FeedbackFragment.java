@@ -203,7 +203,6 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 dialog.dismiss();
-                String throwableResponse = t.getMessage().toString();
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setTitle("Failed");
