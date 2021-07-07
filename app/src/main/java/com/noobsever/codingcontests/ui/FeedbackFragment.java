@@ -112,7 +112,7 @@ public class FeedbackFragment extends Fragment {
 
     private void addItemToSheet(String feedBack){
         final ProgressDialog dialog=ProgressDialog.show(context,"Adding Item","Please wait...");
-        String url="https://script.google.com/macros/s/AKfycbwB96-jJMlKERp9hbKNySyY7Lj3jqhrr83XO7p7s8RQ9ejBCnSaz8xhDp2bvLxFSDXh/exec";
+        String url="https://script.google.com/macros/s/AKfycbx1Dhfh1g0F41gjwRIdMcBIHbFlWj2yANfAeAxg7lo9RR3yjIWLVn26vxaWP9kMpOs/exec";
         StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -123,6 +123,7 @@ public class FeedbackFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                dialog.dismiss();
                 Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }){
