@@ -576,13 +576,19 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         switch (item.getItemId()) {
             case R.id.nav_gallery:
                 navController.navigate(R.id.nav_gallery);
+                drawer.closeDrawer(GravityCompat.START);
                 break;
+
             case R.id.nav_slideshow:
                 navController.navigate(R.id.nav_slideshow);
+                drawer.closeDrawer(GravityCompat.START);
                 break;
+
             case R.id.nav_home:
                 navController.navigate(R.id.nav_home);
+                drawer.closeDrawer(GravityCompat.START);
                 break;
+
             case R.id.nav_share:
                 try {
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -594,9 +600,12 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     e.printStackTrace();
                 }
                 break;
+
             case R.id.nav_suggest:
                 navController.navigate(R.id.nav_suggest);
+                drawer.closeDrawer(GravityCompat.START);
                 break;
+
             case R.id.nav_open_source:
                 try {
                     String url = "https://github.com/hnccbits/3C-Coding-Contests-Calendar-App";
@@ -606,9 +615,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                drawer.closeDrawer(GravityCompat.START);
                 break;
         }
-        drawer.closeDrawer(GravityCompat.START);
+
         return false;
     }
 
