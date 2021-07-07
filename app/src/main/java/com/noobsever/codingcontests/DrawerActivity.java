@@ -525,7 +525,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         }
     }
 
-    public void restoreCheckBoxState() {
+    private void restoreCheckBoxState() {
         HashSet<String> set = new HashSet<>(prevCheckedListItem);
         cforces.setChecked(set.contains(Constants.CODEFORCES));
         cchef.setChecked(set.contains(Constants.CODECHEF));
@@ -538,7 +538,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     }
 
     /***/
-    public void restoreToggledItemsState() {
+    private void restoreToggledItemsState() {
         switchTwelve.setChecked(Methods.getIntPreferences(DrawerActivity.this, Constants.SWITCH_TWELVE, Constants.SWITCH_TWELVE) != 0);
         switchTwentyFour.setChecked(Methods.getIntPreferences(DrawerActivity.this, Constants.SWITCH_TWELVE, Constants.SWITCH_TWELVE) == 0);
         switchNotification.setChecked(Methods.getIntPreferences(DrawerActivity.this, Constants.SWITCH_NOTIFICATION, Constants.SWITCH_NOTIFICATION) != 0);
