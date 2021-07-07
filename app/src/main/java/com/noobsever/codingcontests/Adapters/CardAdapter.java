@@ -116,10 +116,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
         holder.mRoundName.setText(ContestObjectArrayList.get(position).getTitle());
         holder.mDateEnd.setText(Methods.getStringFormat(ContestObjectArrayList.get(position).getEnd()));
         holder.mDateStart.setText(Methods.getStringFormat(ContestObjectArrayList.get(position).getStart()));
-        holder.mDuration.setText(ContestObjectArrayList.get(position).getDuration());
-//        Log.e(TAG, "START>>>>: "+ ContestObjectArrayList.get(position).getStart());
-//        Log.e(TAG, "DATE>>>>: "+ ContestObjectArrayList.get(position).getStart().substring(0,10));
-        Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: " + ContestObjectArrayList.get(position).getPlatform());
+        holder.mDuration.setText(durationFormater(ContestObjectArrayList.get(position).getDuration()));
+//        holder.mDuration.setText(ContestObjectArrayList.get(position).getDuration());
+
+//        Log.e("TAG : DATA DISPLAY:", "onBindViewHolder: " + ContestObjectArrayList.get(position).getPlatform());
 
 
 //        if (CheckMoreFlag.get(position)) {
@@ -231,6 +231,48 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
 
             }
         });
+    }
+
+    private String durationFormater(String duration){
+        String formatDuration = "";
+
+        double doubleDuration = Double.parseDouble(duration);
+        long durMin = (long)doubleDuration / 60;
+
+        // contests of more than a year
+        if(durMin > 518400){
+            formatDuration += "For practice";
+            return formatDuration;
+        }
+
+        // contests of more than a month
+        if(durMin > 43200){
+            formatDuration += durMin/43200 +" month";
+            return formatDuration;
+        }
+
+        // There ane 24 * 60 minutes in a day
+        if(durMin > 1440){
+            formatDuration += durMin/1440 +" days";
+            durMin %= 1440;
+
+            if(durMin >0){
+                formatDuration +=", ";
+            }
+        }
+
+        if(durMin > 0){
+            formatDuration += durMin/60 +" hr";
+            durMin %= 60;
+        }
+
+        if(durMin > 0){
+            formatDuration += ", ";
+            formatDuration += durMin + " min";
+        }
+
+        // formatDuration is in format ie "3 days, 4 hr, 30 min"
+        return formatDuration;
     }
 
 

@@ -587,10 +587,15 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             case R.id.nav_share:
                 try {
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    String message = "Never miss your favourite coding contest " +
+                            "\n get notified for contests on your favourite platform" +
+                            "\n with various other features" +
+                            "\n https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName();
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, message);
                     shareIntent.setType("text/plain");
-                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "welcome to hncc");
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName());
+
                     startActivity(Intent.createChooser(shareIntent, "Share with"));
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
