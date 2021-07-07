@@ -51,17 +51,14 @@ import java.util.List;
 
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    // TODO: Navigation Drawer has Notification, FAQ, Share US, Feedback, OpenSource Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
+    // TODO: Navigation Drawer has Notification, FAQ Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
     // TODO: Remove all libraries that are not in use
-    // TODO: Feedback should show user a Edit Text. Collect Feedback and save it in a Google spreadsheet. Search Google how to access spreadsheet from Android.
     // TODO: Everywhere in the App show all images using Glide
     // TODO: Remove all deprecated methods
-    // TODO: Reduce MIN SDK from 26. At least Marshmallow or KitKat should be able to run it.
     // TODO: Make all variables private
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
-    //TODO: Make all variables private
     private DrawerLayout drawer;
 
     private ApiViewModel apiViewModel;
@@ -106,7 +103,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 if (item.getItemId() == R.id.nav_open_source) {
-                    Toast.makeText(DrawerActivity.this, "Nipun", Toast.LENGTH_SHORT).show();
                 }
                 return false;
 
@@ -436,7 +432,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         });
     }
 
-    // TODO: If Navigation Drawer is Open and the user presses back button then the list should update
     @Override
     public void onBackPressed() {
         /* If drawer is opened when back pressed drawer will be closed */
