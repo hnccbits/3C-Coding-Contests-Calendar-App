@@ -5,52 +5,53 @@
     android:layout_height="wrap_content"
     android:gravity="bottom"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="162dp"
         android:background="@drawable/side_nav_bar"
+        android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="48dp"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:orientation="horizontal"
-        >
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
         <ImageView
             android:id="@+id/profile_picture"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="73dp"
+            android:layout_height="74dp"
             android:contentDescription="@string/nav_header_desc"
             android:paddingTop="@dimen/nav_header_vertical_spacing" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:gravity="center_vertical"
+                android:maxLines="1"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 android:text="User Name"
-                android:textSize="32sp"
-                android:maxLines="1"
-                android:autoSizeTextType="uniform"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                />
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/profile_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="emailid@provider.com"
-                android:maxLines="1"
-                android:autoSizeTextType="uniform"
                 android:layout_gravity="center_vertical"
+                android:autoSizeTextType="uniform"
                 android:gravity="center_vertical"
-                />
+                android:maxLines="1"
+                android:text="emailid@provider.com" />
 
         </LinearLayout>
 
