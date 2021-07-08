@@ -21,15 +21,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//import com.android.volley.AuthFailureError;
-//import com.android.volley.DefaultRetryPolicy;
-//import com.android.volley.Request;
-//import com.android.volley.RequestQueue;
-//import com.android.volley.Response;
-//import com.android.volley.RetryPolicy;
-//import com.android.volley.VolleyError;
-//import com.android.volley.toolbox.StringRequest;
-//import com.android.volley.toolbox.Volley;
 import com.noobsever.codingcontests.DrawerActivity;
 import com.noobsever.codingcontests.R;
 import com.noobsever.codingcontests.databinding.FragmentFeedbackBinding;
@@ -118,46 +109,6 @@ public class FeedbackFragment extends Fragment {
     private int countWords(String s) {
         return s.replace(" ","").length(); // separate string around spaces
     }
-
-<<<<<<< HEAD
-    private void addItemToSheet(String feedBack){
-        final ProgressDialog dialog=ProgressDialog.show(context,"Adding Item","Please wait...");
-        String url="https://script.google.com/macros/s/AKfycbx1Dhfh1g0F41gjwRIdMcBIHbFlWj2yANfAeAxg7lo9RR3yjIWLVn26vxaWP9kMpOs/exec";
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-=======
-//    private void addItemToSheet(String feedBack){
-//        final ProgressDialog dialog=ProgressDialog.show(context,"Adding Item","Please wait...");
-//        String url="https://script.google.com/macros/s/AKfycbwB96-jJMlKERp9hbKNySyY7Lj3jqhrr83XO7p7s8RQ9ejBCnSaz8xhDp2bvLxFSDXh/exec";
-//        StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                dialog.dismiss();
-//                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-//                context.startActivity(new Intent(context, DrawerActivity.class));
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
-//            }
-//        }){
-//            @Nullable
-//            @org.jetbrains.annotations.Nullable
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> params=new HashMap<>();
-//                params.put("action","addItem");
-//                params.put("itemMessage",feedBack);
-//                return params;
-//            }
-//        };
-//        int shocketTimeOut=50000;
-//        RetryPolicy retryPolicy=new DefaultRetryPolicy(shocketTimeOut,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        stringRequest.setRetryPolicy(retryPolicy);
-//        RequestQueue queue= Volley.newRequestQueue(context);
-//        queue.add(stringRequest);
-//    }
-
     private  void addFeedbackToSheet(String feedback){
         dialog=ProgressDialog.show(context,"Adding Item","Please wait...");
 
@@ -169,20 +120,9 @@ public class FeedbackFragment extends Fragment {
         Call<Void> call = webservice.postValues(feedback);
 
         call.enqueue(new Callback<Void>() {
->>>>>>> ce3efcf (used retrofit to get feedback)
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 dialog.dismiss();
-<<<<<<< HEAD
-                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-                context.startActivity(new Intent(context, DrawerActivity.class));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                dialog.dismiss();
-                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
-=======
                 int responseCode = response.code();
                 if (responseCode == 200) {
 
@@ -197,7 +137,6 @@ public class FeedbackFragment extends Fragment {
                     });
                     alert.show();
                 }
->>>>>>> ce3efcf (used retrofit to get feedback)
             }
 
             @Override

@@ -21,7 +21,7 @@
         android:id="@+id/nav_slideshow"
         android:name="com.noobsever.codingcontests.ui.slideshow.FAQsFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_faq" />
     <fragment android:id="@+id/nav_suggest"
         android:name="com.noobsever.codingcontests.ui.FeedbackFragment"
         android:label="Feedback"

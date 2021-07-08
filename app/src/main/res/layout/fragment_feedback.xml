@@ -22,7 +22,8 @@
             <EditText
                 android:id="@+id/feedback_edittext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="210dp"
+                android:gravity="top"
                 android:background="@drawable/edit_text_bg_not_pressed"
                 android:padding="15dp"
                 android:hint="Describe your experience (optional)"
