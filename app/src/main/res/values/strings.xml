@@ -21,7 +21,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="communicate">Communicate</string>
 
-    <string name="Start">SRT</string>
+    <string name="Start">START</string>
     <string name="End">END</string>
     <string name="notification">Notifications</string>
     <string name="enable_notif">Enable Notifications</string>

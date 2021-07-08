@@ -37,11 +37,11 @@ public class SignIn extends AppCompatActivity {
         signOut = findViewById(R.id.button_sign_out);
 
 //         serverClientId is seperate for every integrated signh In. It is just like a Token.
-        String serverClientId = getString(R.string.web_client_id);
+//        String serverClientId = getString(R.string.web_client_id);
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestServerAuthCode(serverClientId)
+//                .requestServerAuthCode(serverClientId)
                 .requestEmail()
                 .build();
 
