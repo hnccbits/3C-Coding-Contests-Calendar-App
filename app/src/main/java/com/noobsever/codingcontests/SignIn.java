@@ -36,12 +36,12 @@ public class SignIn extends AppCompatActivity {
         skip = findViewById(R.id.button_skip);
         signOut = findViewById(R.id.button_sign_out);
 
-        // serverClientId is seperate for every integrated signh In. It is just like a Token.
-        String serverClientId = getString(R.string.web_client_id);
+//         serverClientId is seperate for every integrated signh In. It is just like a Token.
+//        String serverClientId = getString(R.string.web_client_id);
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestServerAuthCode(serverClientId)
+//                .requestServerAuthCode(serverClientId)
                 .requestEmail()
                 .build();
 
@@ -89,7 +89,6 @@ public class SignIn extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
-            Log.e("Nipun","1st ");
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -100,7 +99,6 @@ public class SignIn extends AppCompatActivity {
             /**Sign In success
              * Update UI if necessary
              * and then switch Activity*/
-            Log.e("Nipun","2nd");
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SignIn.this, DrawerActivity.class));
@@ -127,12 +125,15 @@ public class SignIn extends AppCompatActivity {
     }
 
     // TODO: If the user is already SignedIn no need to show SignIn Activity. Skip this activity before the UI loads.
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        // Check for existing Google Sign In account, if the user is already signed in
-//        // the GoogleSignInAccount will be non-null.
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        updateUI(account);
-//    }
+    @Override
+    protected void onStart() {
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null){
+            startActivity(new Intent(SignIn.this, DrawerActivity.class));
+        }
+
+    }
 }
