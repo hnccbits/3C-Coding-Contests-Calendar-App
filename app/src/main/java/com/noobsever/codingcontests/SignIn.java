@@ -100,7 +100,7 @@ public class SignIn extends AppCompatActivity {
              * Update UI if necessary
              * and then switch Activity*/
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SignIn.this, DrawerActivity.class));
 
 
@@ -108,7 +108,6 @@ public class SignIn extends AppCompatActivity {
             /** SignIn Failure */
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.e("Nipun",e.toString());
             Toast.makeText(this, "FAILURE", Toast.LENGTH_SHORT).show();
         }
     }
@@ -124,7 +123,6 @@ public class SignIn extends AppCompatActivity {
                 });
     }
 
-    // TODO: If the user is already SignedIn no need to show SignIn Activity. Skip this activity before the UI loads.
     @Override
     protected void onStart() {
         // Check for existing Google Sign In account, if the user is already signed in

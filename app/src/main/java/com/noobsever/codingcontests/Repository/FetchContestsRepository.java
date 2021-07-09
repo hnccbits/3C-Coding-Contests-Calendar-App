@@ -1,20 +1,15 @@
 package com.noobsever.codingcontests.Repository;
 
-import android.app.Application;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.noobsever.codingcontests.Models.ApiResponse;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.Services.APIClient;
 import com.noobsever.codingcontests.Services.ApiInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

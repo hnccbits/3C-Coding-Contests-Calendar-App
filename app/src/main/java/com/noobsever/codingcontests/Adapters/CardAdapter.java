@@ -26,8 +26,8 @@ import com.noobsever.codingcontests.Utils.Methods;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -227,6 +227,43 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardAdapterVie
                     }
                 } else {
                     // handle this for lesser api
+
+                    // setting the start
+                    Calendar calendarStart =Calendar.getInstance();
+                    calendarStart.setTimeInMillis(System.currentTimeMillis());
+
+                    String strStart = ContestObjectArrayList.get(position).getStart().substring(0, 16);
+                    calendarStart.set(Calendar.YEAR, Integer.parseInt(strStart.substring(0, 4)));
+                    calendarStart.set(Calendar.MONTH, Integer.parseInt(strStart.substring(5, 7)));
+                    calendarStart.set(Calendar.DAY_OF_MONTH, Integer.parseInt(strStart.substring(8, 10)));
+                    calendarStart.set(Calendar.HOUR_OF_DAY, Integer.parseInt(strStart.substring(11, 13)));
+                    calendarStart.set(Calendar.MINUTE, Integer.parseInt(strStart.substring(14, 16)));
+                    calendarStart.set(Calendar.SECOND,0);
+                    calendarStart.set(Calendar.MILLISECOND, 0);
+
+                    // setting the end
+                    Calendar calendarEnd =Calendar.getInstance();
+                    calendarEnd.setTimeInMillis(System.currentTimeMillis());
+
+                    String strEnd = ContestObjectArrayList.get(position).getEnd().substring(0, 16);
+                    calendarEnd.set(Calendar.YEAR, Integer.parseInt(strEnd.substring(0, 4)));
+                    calendarEnd.set(Calendar.MONTH, Integer.parseInt(strEnd.substring(5, 7)));
+                    calendarEnd.set(Calendar.DAY_OF_MONTH, Integer.parseInt(strEnd.substring(8, 10)));
+                    calendarEnd.set(Calendar.HOUR_OF_DAY, Integer.parseInt(strEnd.substring(11, 13)));
+                    calendarEnd.set(Calendar.MINUTE, Integer.parseInt(strEnd.substring(14, 16)));
+                    calendarEnd.set(Calendar.SECOND,0);
+                    calendarEnd.set(Calendar.MILLISECOND, 0);
+
+                    Intent intent = new Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.Events.CONTENT_URI)
+                            .putExtra(CalendarContract.Events.TITLE, ContestObjectArrayList.get(position).getTitle())
+                            .putExtra(CalendarContract.Events.EVENT_LOCATION, ContestObjectArrayList.get(position).getPlatform())
+                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarStart.getTimeInMillis())
+                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarEnd.getTimeInMillis());
+
+                    if(intent.resolveActivity(context.getPackageManager()) != null) {
+                        context.startActivity(intent);
+                    }
                 }
 
             }

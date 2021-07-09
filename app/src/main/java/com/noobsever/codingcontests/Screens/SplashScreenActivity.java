@@ -13,10 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.noobsever.codingcontests.DrawerActivity;
 import com.noobsever.codingcontests.R;
-import com.noobsever.codingcontests.SignIn;
-import com.noobsever.codingcontests.Utils.Constants;
-import com.noobsever.codingcontests.Utils.Methods;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -30,7 +28,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         /**Show splash Screen UI for 2000 milliseconds and then change move to SignIn Activity*/
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, SignIn.class));
+                startActivity(new Intent(SplashScreenActivity.this, DrawerActivity.class));
                 finish(); // kill SplashScreenActivity.java activity to save memory
             }
         }, 2000);
@@ -65,7 +63,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                     editor.putBoolean("activatedNotificationFirstTime", true);
                                     editor.putBoolean("notificationIsOn", true);
 
-                                    Toast.makeText(SplashScreenActivity.this, "Subscribe Success", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(SplashScreenActivity.this, "Subscribe Success", Toast.LENGTH_SHORT).show();
                                 }
                                 editor.commit();
                             }
