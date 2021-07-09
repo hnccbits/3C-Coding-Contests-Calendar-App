@@ -66,11 +66,6 @@
 
         <activity android:name=".Screens.RoomActivity" />
 
-        <activity
-            android:name=".Screens.HelpActivity"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".DrawerActivity" />
-
         <activity android:name=".Screens.SplashScreenActivity"
             android:theme="@style/splashScreenStyle">
             <intent-filter>

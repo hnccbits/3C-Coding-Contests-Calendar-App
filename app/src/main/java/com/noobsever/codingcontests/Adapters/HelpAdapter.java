@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,50 +38,14 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.HelpAdapterVie
 
     @Override
     public void onBindViewHolder(@NonNull final HelpAdapterViewHolder holder, final int position) {
-        holder.questionTextView.setText(helpObjectArrayList.get(position).getQuestion());
-        holder.answerTextView.setText(helpObjectArrayList.get(position).getAnswer());
-        if(helpObjectArrayList.get(position).getArrowID()==0)
-        {
-            holder.arrowImageView.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_48);
-            holder.answerTextView.setVisibility(View.GONE); //Initially all question views will be unexpanded, so the visibilty of Answer view is set to View.GONE
-        }
-        else
-        {
-            holder.arrowImageView.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_48);
-        }
-        holder.arrowImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(helpObjectArrayList.get(position).getArrowID()==0)
-                {
-                    //This condition implements the logic to expand the answer when question is unexpanded, expand the answer by set ArrowID to 1,
-                    helpObjectArrayList.get(position).setArrowID(1);
-                    holder.answerTextView.setVisibility(View.VISIBLE);  //Change the visibility of Answer View to View.VISIBLE
-                    holder.arrowImageView.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_48);
-
-                    holder.answerTextView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale));
-
-                    if(dropDownIndex == -1)
-                    {
-                        dropDownIndex = position;
-                    }
-                    else
-                    {
-                        helpObjectArrayList.get(dropDownIndex).setArrowID(0);
-                        notifyItemChanged(dropDownIndex);
-                        dropDownIndex = position;
-                    }
-
-                }
-                else
-                {
-                    // This condition implements logic to close the expanded question
-                    dropDownIndex = -1;
-                    helpObjectArrayList.get(position).setArrowID(0);
-                    holder.arrowImageView.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_48);
-                    holder.answerTextView.setVisibility(View.GONE);
-                }
-            }
+        HelpObject object=helpObjectArrayList.get(position);
+        holder.questionTextView.setText(object.getQuestion());
+        holder.answerTextView.setText(object.getAnswer());
+        holder.answerTextView.setVisibility(object.isExpanded()?View.VISIBLE:View.GONE);
+        holder.arrowImageView.setImageResource(object.isExpanded()?R.drawable.ic_drop_up:R.drawable.ic_drop_down);
+        holder.helpContainer.setOnClickListener(v -> {
+            object.setExpansion(!object.isExpanded());
+            notifyItemChanged(position);
         });
     }
 
@@ -93,11 +58,13 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.HelpAdapterVie
         private final TextView questionTextView;
         private final TextView answerTextView;
         private final ImageView arrowImageView;
+        private LinearLayout helpContainer;
         public HelpAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             questionTextView = itemView.findViewById(R.id.help_question);
             answerTextView = itemView.findViewById(R.id.help_answer);
             arrowImageView = itemView.findViewById(R.id.help_arrow_id);
+            helpContainer=itemView.findViewById(R.id.help_container);
         }
     }
 
