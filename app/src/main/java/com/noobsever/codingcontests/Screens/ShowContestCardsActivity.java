@@ -1,9 +1,7 @@
 package com.noobsever.codingcontests.Screens;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-//import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,7 +19,6 @@ import android.widget.Toast;
 import com.noobsever.codingcontests.Adapters.CardAdapter;
 import com.noobsever.codingcontests.Models.ContestObject;
 import com.noobsever.codingcontests.R;
-import com.noobsever.codingcontests.Repository.RoomRepository;
 import com.noobsever.codingcontests.Utils.Constants;
 import com.noobsever.codingcontests.Utils.Methods;
 import com.noobsever.codingcontests.ViewModel.ApiViewModel;
@@ -35,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 public class ShowContestCardsActivity extends AppCompatActivity {
     // TODO: Make all variables Private

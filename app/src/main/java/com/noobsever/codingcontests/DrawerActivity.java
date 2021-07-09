@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -51,11 +50,11 @@ import java.util.List;
 
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    // TODO: Navigation Drawer has Notification, FAQ Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
+    // TODO: Navigation Drawer has Notification Tab. These tabs are Incomplete. Contact Anubhaw Sir for FAQ Fragment.
     // TODO: Remove all libraries that are not in use
     // TODO: Everywhere in the App show all images using Glide
     // TODO: Remove all deprecated methods
-    // TODO: Make all variables private
+
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
@@ -545,12 +544,12 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         switchOneMonth.setChecked(Methods.getIntPreferences(DrawerActivity.this, Constants.SWITCH_1MONTH, Constants.SWITCH_1MONTH) != 0);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.drawer, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.drawer, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {
