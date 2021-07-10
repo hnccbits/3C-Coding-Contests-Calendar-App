@@ -5,7 +5,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.noobsever.codingcontests"
+        applicationId "com.hnccbits.codingcontestscalendar"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

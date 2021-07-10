@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.noobsever.codingcontests">
+    package="com.hnccbits.codingcontestscalendar">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DrawerActivity"
+        <activity android:name="com.hnccbits.codingcontestscalendar.DrawerActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.INSERT" />
@@ -60,13 +60,13 @@
         <!-- </intent-filter> -->
         <!-- </service> -->
         <activity
-            android:name=".Screens.ShowContestCardsActivity"
+            android:name="com.hnccbits.codingcontestscalendar.Screens.ShowContestCardsActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".DrawerActivity" />
+            android:parentActivityName="com.hnccbits.codingcontestscalendar.DrawerActivity" />
 
-        <activity android:name=".Screens.RoomActivity" />
+        <activity android:name="com.hnccbits.codingcontestscalendar.Screens.RoomActivity" />
 
-        <activity android:name=".Screens.SplashScreenActivity"
+        <activity android:name="com.hnccbits.codingcontestscalendar.Screens.SplashScreenActivity"
             android:theme="@style/splashScreenStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
