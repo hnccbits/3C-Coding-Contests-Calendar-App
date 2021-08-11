@@ -3,7 +3,7 @@
 <br>
 <img src="./applogo2.png" alt="applogo" width="300" height="300">
 <p> <h3>Download the app from playstore:</h3>
-<h2>https://play.google.com/store/apps/details?id=com.hnccbits.codingcontestscalendar&hl=en&gl=US</h2>
+<h4>https://play.google.com/store/apps/details?id=com.hnccbits.codingcontestscalendar&hl=en&gl=US</h4>
 </p>
 <h2> Tools, Technology and Software used </h2>
 
